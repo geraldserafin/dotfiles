@@ -1,10 +1,8 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.default
-  ];
+  imports =
+    [ ./hardware-configuration.nix inputs.home-manager.nixosModules.default ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -13,7 +11,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  services.xserver = { 
+  services.xserver = {
     enable = true;
     windowManager.xmonad = {
       enable = true;
@@ -27,6 +25,18 @@
       variant = "";
     };
   };
+
+  # services.postgresql = {
+  #   enable = true;
+  #   package = pkgs.postgresql_15;
+  #   settings.port = 5432;
+  #   authentication = pkgs.lib.mkOverride 10 ''
+  #     			#type database  DBuser  auth-method
+  #           local all       all												trust
+  #           host	all				all			127.0.0.1/32			trust
+  #   '';
+  #   extraPlugins = with pkgs.postgresql15Packages; [ pgvector ];
+  # };
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -51,22 +61,37 @@
 
   console.keyMap = "pl2";
 
+  programs.zsh = {
+    enable = true;
+    interactiveShellInit = ''
+      zstyle ':grml:completion:compinit' arguments -C
+      source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
+      autoload -Uz compinit
+      if [[ -n ${"ZDOTDIR:-$HOME"}/.zcompdump(#qN.mh+24) ]]; then
+        compinit
+      else
+        # We don't do `compinit -C` here because the GRML zshrc already did it above.
+      fi
+    '';
+    promptInit = "";
+    enableGlobalCompInit = false;
+  };
+
   users.users.gerald = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    shell = pkgs.zsh;
   };
 
-  home-manager = { 
+  home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    users = { 
-      "gerald" = import ./home.nix;
-    };
+    users = { "gerald" = import ./home.nix; };
   };
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [ ];
+
   environment.variables.EDITOR = "nvim";
 
   system.stateVersion = "23.11";

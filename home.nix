@@ -11,9 +11,16 @@
     xmobar
     killall
     rofi
-    spotify
     telegram-desktop
     pavucontrol
+    gcc
+    lua-language-server
+    stylua
+    nixd
+    nixfmt-classic
+    zsh-powerlevel10k
+    spotify
+    google-chrome
   ];
 
   home.sessionVariables = {
@@ -21,12 +28,14 @@
     BROWSER = "firefox";
   };
 
-  imports = [ 
+  imports = [
     (import ./modules/xmonad)
     (import ./modules/xmobar)
     (import ./modules/alacritty)
     (import ./modules/git)
     (import ./modules/nvim)
+    (import ./modules/zsh)
+    (import ./modules/tmux)
   ];
 
   programs.home-manager.enable = true;

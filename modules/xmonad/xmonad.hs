@@ -25,8 +25,13 @@ myKeys = [ ((mod1Mask, xK_q), spawn "xmonad --recompile; killall xmobar; xmonad 
          , ((mod1Mask, xK_p), spawn "rofi -show run")
          ]  
 
+myStartupHook = do
+	spawnOn "web" "firefox"
+	spawnOn "social" "telegram-desktop"
+
 main = do
   xmproc <- spawnPipe "xmobar ~/.config/xmobar/xmobarrc"
+
   xmonad $ docks $ def { 
     borderWidth = 2 
     , terminal    = "alacritty"
@@ -34,6 +39,8 @@ main = do
     , focusedBorderColor = "#959595"
     , normalBorderColor = "#3c3c3c"
     , workspaces  = myWorkspaces 
+		, startupHook = myStartupHook
+		, manageHook = manageSpawn <+> manageHook def
     , logHook = dynamicLogWithPP $ myXmobarPP { ppOutput = hPutStrLn xmproc } 
     } `additionalKeys` myKeys
 
