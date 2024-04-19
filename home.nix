@@ -20,7 +20,6 @@
     nixfmt-classic
     zsh-powerlevel10k
     spotify
-    google-chrome
   ];
 
   home.sessionVariables = {

@@ -26,22 +26,24 @@ myKeys = [ ((mod1Mask, xK_q), spawn "xmonad --recompile; killall xmobar; xmonad 
          ]  
 
 myStartupHook = do
-	spawnOn "web" "firefox"
-	spawnOn "social" "telegram-desktop"
+  spawnOn "music"  "spotify"
+  spawnOn "web"    "firefox"
+  spawnOn "dev"    "alacritty && tmux attach"
+  spawnOn "social" "telegram-desktop"
 
 main = do
   xmproc <- spawnPipe "xmobar ~/.config/xmobar/xmobarrc"
 
-  xmonad $ docks $ def { 
-    borderWidth = 2 
-    , terminal    = "alacritty"
-    , layoutHook  = spacingWithEdge 8 myLayout
+  xmonad $ docks $ def 
+    { borderWidth        = 2 
+    , terminal           = "alacritty"
+    , layoutHook         = spacingWithEdge 8 myLayout
     , focusedBorderColor = "#959595"
-    , normalBorderColor = "#3c3c3c"
-    , workspaces  = myWorkspaces 
-		, startupHook = myStartupHook
-		, manageHook = manageSpawn <+> manageHook def
-    , logHook = dynamicLogWithPP $ myXmobarPP { ppOutput = hPutStrLn xmproc } 
+    , normalBorderColor  = "#3c3c3c"
+    , workspaces         = myWorkspaces 
+		, startupHook        = myStartupHook
+		, manageHook         = manageSpawn <+> manageHook def
+    , logHook            = dynamicLogWithPP $ myXmobarPP { ppOutput = hPutStrLn xmproc } 
     } `additionalKeys` myKeys
 
 myXmobarPP = def

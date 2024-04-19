@@ -22,5 +22,8 @@
             [ ./configuration.nix inputs.home-manager.nixosModules.default ];
         };
       };
+      devShells.${system}.default = pkgs.mkShell {
+        nativeBuildInputs = with pkgs; [ ghc haskell-language-server ];
+      };
     };
 }
