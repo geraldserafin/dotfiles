@@ -1,6 +1,7 @@
-{ ... }:
+{ config, pkgs, ... }:
 
 {
+  home.sessionVariables.SHELL = "${pkgs.zsh}/bin/zsh";
   programs.zsh = {
     enable = true;
     enableCompletion = false;
@@ -9,8 +10,11 @@
     '';
     shellAliases = {
       rebuild =
-        "sudo nixos-rebuild switch --flake '/home/gerald/.dotfiles#default'";
+        "sudo nixos-rebuild switch --flake '${config.home.homeDirectory}/repos/dotfiles#default'";
       develop = "nix develop -c zsh";
+      shutdown = "systemctl poweroff";
+      gswc = "git checkout -b";
+      gsw = "git checkout";
     };
     zplug = {
       enable = true;

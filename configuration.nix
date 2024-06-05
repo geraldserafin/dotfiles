@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ inputs, ... }:
 
 {
   imports =
@@ -11,36 +11,27 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  services.xserver = {
+  services.picom = {
     enable = true;
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-    };
-    displayManager.sessionCommands = ''
-      xrandr --output "DVI-D-1" --primary --left-of "DP-1"
-    '';
-    xkb = {
-      layout = "pl";
-      variant = "";
-    };
+    vSync = true;
   };
-
-  # services.postgresql = {
-  #   enable = true;
-  #   package = pkgs.postgresql_15;
-  #   settings.port = 5432;
-  #   authentication = pkgs.lib.mkOverride 10 ''
-  #     			#type database  DBuser  auth-method
-  #           local all       all												trust
-  #           host	all				all			127.0.0.1/32			trust
-  #   '';
-  #   extraPlugins = with pkgs.postgresql15Packages; [ pgvector ];
-  # };
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
   nixpkgs.config.pulseaudio = true;
+
+  services.xserver = {
+    enable = true;
+    displayManager.session = [{
+      manage = "desktop";
+      name = "xsession";
+      start = "";
+    }];
+    xkb = {
+      layout = "us,pl";
+      variant = "workman,";
+    };
+  };
 
   networking.networkmanager.enable = true;
 
@@ -61,26 +52,9 @@
 
   console.keyMap = "pl2";
 
-  programs.zsh = {
-    enable = true;
-    interactiveShellInit = ''
-      zstyle ':grml:completion:compinit' arguments -C
-      source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
-      autoload -Uz compinit
-      if [[ -n ${"ZDOTDIR:-$HOME"}/.zcompdump(#qN.mh+24) ]]; then
-        compinit
-      else
-        # We don't do `compinit -C` here because the GRML zshrc already did it above.
-      fi
-    '';
-    promptInit = "";
-    enableGlobalCompInit = false;
-  };
-
   users.users.gerald = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
   };
 
   home-manager = {
@@ -89,10 +63,6 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = with pkgs; [ ];
-
-  environment.variables.EDITOR = "nvim";
 
   system.stateVersion = "23.11";
 }

@@ -23,6 +23,7 @@
         };
       };
       devShells.${system}.default = pkgs.mkShell {
+        name = "dotfiles";
         nativeBuildInputs = with pkgs; [ ghc haskell-language-server ];
       };
     };

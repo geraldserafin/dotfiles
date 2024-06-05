@@ -10,6 +10,7 @@
       set -g prefix ^a
       set -g status-left-length 128
       set -g mouse on
+      set -g escape-time 10
 
       set-option -g status-position top
 

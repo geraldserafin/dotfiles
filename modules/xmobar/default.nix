@@ -1,5 +1,5 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
-  xdg.configFile."/home/gerald/.config/xmobar/xmobarrc".source = ./xmobarrc;
+  xdg.configFile."xmobar/xmobarrc".source = ./xmobarrc;
 }

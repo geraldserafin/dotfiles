@@ -9,7 +9,9 @@ import XMonad.Util.Loggers
 import XMonad.Actions.SpawnOn
 import XMonad.Layout.Spacing
 import XMonad.Util.Run
+import XMonad.Util.Hacks
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.EwmhDesktops
 import qualified XMonad.StackSet as W
 
 myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
@@ -21,28 +23,30 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
 
 myWorkspaces = ["main", "dev", "web", "music", "social", "..."]
 
-myKeys = [ ((mod1Mask, xK_q), spawn "xmonad --recompile; killall xmobar; xmonad --restart")
-         , ((mod1Mask, xK_p), spawn "rofi -show run")
+myKeys = [ ((mod4Mask, xK_q), spawn "xmonad --recompile; killall xmobar; xmonad --restart")
+         , ((mod4Mask, xK_p), spawn "rofi -show combi")
+         , ((mod4Mask, xK_s), spawn "maim -s | xclip -selection clipboard -t image/png")
          ]  
 
 myStartupHook = do
   spawnOn "music"  "spotify"
+  spawnOn "dev"    "alacritty"
   spawnOn "web"    "firefox"
-  spawnOn "dev"    "alacritty && tmux attach"
   spawnOn "social" "telegram-desktop"
 
 main = do
   xmproc <- spawnPipe "xmobar ~/.config/xmobar/xmobarrc"
 
-  xmonad $ docks $ def 
+  xmonad $ docks $ ewmhFullscreen $ ewmh def 
     { borderWidth        = 2 
     , terminal           = "alacritty"
-    , layoutHook         = spacingWithEdge 8 myLayout
+    , layoutHook         = myLayout
     , focusedBorderColor = "#959595"
     , normalBorderColor  = "#3c3c3c"
+    , modMask            = mod4Mask
     , workspaces         = myWorkspaces 
-		, startupHook        = myStartupHook
-		, manageHook         = manageSpawn <+> manageHook def
+    , startupHook        = myStartupHook
+    , manageHook         = manageSpawn <+> manageHook def
     , logHook            = dynamicLogWithPP $ myXmobarPP { ppOutput = hPutStrLn xmproc } 
     } `additionalKeys` myKeys
 

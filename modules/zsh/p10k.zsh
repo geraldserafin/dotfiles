@@ -53,6 +53,7 @@
     vcs                       # git status
     command_execution_time    # previous command duration
     virtualenv                # python virtual environment
+    nix_shell
     prompt_char               # prompt symbol
   )
 
@@ -180,6 +181,10 @@
   # can slow down prompt by 1-2 milliseconds, so it's better to keep it turned off unless you
   # really need it.
   typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
+
+  #[ nix_shell: nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html) ]##
+  # Nix shell color.
+  typeset -g POWERLEVEL9K_NIX_SHELL_FOREGROUND=74
 
   # If p10k is already loaded, reload configuration.
   # This works even with POWERLEVEL9K_DISABLE_HOT_RELOAD=true.

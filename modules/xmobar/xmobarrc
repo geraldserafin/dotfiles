@@ -11,11 +11,11 @@ Config { font = "JetBrainsMono Nerd Font 10"
        , commands = [ Run Network "enp7s0" ["-t", "<fc=#959595>\xf484 <dev></fc>"] 10
                     , Run Cpu ["-t", "<fc=#959595>\xf035b <total>%</fc>"] 10
                     , Run Com "uname" ["-n"] "" 36000
-    		    , Run Date "<fc=#959595>\xf455 %d %b %Y</fc>" "date" 10
-		    , Run Date "<fc=#959595>\xf43a %H:%M</fc>" "time" 10
-		    , Run StdinReader
+    		            , Run Date "<fc=#959595>\xf455 %d %b %Y</fc>" "date" 10
+		                , Run Date "<fc=#959595>\xf43a %H:%M</fc>" "time" 10
+		                , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <fc=#959595><icon=haskell_16.xbm/></fc> %StdinReader% } { %cpu% | %enp7s0% | %date% | %time% "
+       , template = "%StdinReader% } { %cpu% | %enp7s0% | %date% | %time% "
        }
