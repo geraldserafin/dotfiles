@@ -11,6 +11,7 @@
         };
         size = 15;
       };
+      window = { decorations = "None"; };
     };
   };
 }
