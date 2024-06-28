@@ -11,6 +11,7 @@
     (import ./modules/zsh)
     (import ./modules/tmux)
     (import ./modules/rofi)
+    (import ./modules/openpomodoro-cli)
   ];
 
   home = {

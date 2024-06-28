@@ -10,12 +10,13 @@ Config { font = "JetBrainsMono Nerd Font 10"
        , iconRoot = "/home/gerald/.config/xmobar/xbm/"
        , commands = [ Run Network "enp7s0" ["-t", "<fc=#959595>\xf484 <dev></fc>"] 10
                     , Run Cpu ["-t", "<fc=#959595>\xf035b <total>%</fc>"] 10
-                    , Run Com "uname" ["-n"] "" 36000
     		            , Run Date "<fc=#959595>\xf455 %d %b %Y</fc>" "date" 10
 		                , Run Date "<fc=#959595>\xf43a %H:%M</fc>" "time" 10
+                    , Run Com "sh" ["-c", "pomodoro status --format \"<fc=#959595>%d %r</fc>\""] "pomodoroTime" 10
+                    , Run Com "sh" ["-c", "pomodoro status --format \"<fc=#959595>%c/%g 🍅</fc>\""] "pomodoroGoal" 10
 		                , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% } { %cpu% | %enp7s0% | %date% | %time% "
+       , template = " %StdinReader% } { %pomodoroTime% %pomodoroGoal% | %cpu% | %enp7s0% | %date% | %time% "
        }
