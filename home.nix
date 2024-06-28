@@ -47,6 +47,7 @@
       tor-browser
       feh
       openpomodoro-cli
+      neofetch
     ];
   };
 
