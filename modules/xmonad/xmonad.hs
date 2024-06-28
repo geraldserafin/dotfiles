@@ -21,19 +21,25 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
     ratio   = 1/2
     delta   = 3/100
 
-myWorkspaces = ["main", "dev", "web", "music", "social", "..."]
+myWorkspaces = ["main", "dev", "web", "music", "social", "notes", "..."]
 
-myKeys = [ ((mod4Mask, xK_q), spawn "xmonad --recompile; killall xmobar; xmonad --restart")
-         , ((mod4Mask, xK_p), spawn "rofi -show combi")
-         , ((mod4Mask, xK_s), spawn "maim -s | xclip -selection clipboard -t image/png")
+myModMask = mod4Mask
+
+myKeys = [ ((myModMask, xK_r     ), spawn "xmonad --recompile; killall xmobar; xmonad --restart")
+         , ((myModMask, xK_s     ), spawn "maim -s | xclip -selection clipboard -t image/png"   )
+         , ((myModMask, xK_Return), spawn "alacritty"       )
+         , ((myModMask, xK_p     ), spawn "rofi -show combi")
+         , ((myModMask, xK_P     ), spawn "pomodoro 25 5")
+         , ((myModMask, xK_q     ), kill                    )
          ]  
 
 myStartupHook = do
-  spawnOn "music"  "spotify"
-  spawnOn "dev"    "alacritty"
   spawnOn "web"    "firefox"
-  spawnOn "social" "telegram-desktop"
-
+  spawnOn "dev"    "alacritty"
+  spawnOn "music"  "spotify"
+  spawnOn "social" "telegram-desktop"  
+  spawnOn "notes"  "obsidian"
+  
 main = do
   xmproc <- spawnPipe "xmobar ~/.config/xmobar/xmobarrc"
 
@@ -43,7 +49,7 @@ main = do
     , layoutHook         = myLayout
     , focusedBorderColor = "#959595"
     , normalBorderColor  = "#3c3c3c"
-    , modMask            = mod4Mask
+    , modMask            = myModMask
     , workspaces         = myWorkspaces 
     , startupHook        = myStartupHook
     , manageHook         = manageSpawn <+> manageHook def

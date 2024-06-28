@@ -8,6 +8,5 @@
       enableContribAndExtras = true;
       config = ./xmonad.hs;
     };
-
   };
 }
