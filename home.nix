@@ -12,6 +12,7 @@
     (import ./modules/tmux)
     (import ./modules/rofi)
     (import ./modules/openpomodoro-cli)
+    (import ./modules/dunst)
   ];
 
   home = {
@@ -49,6 +50,7 @@
       feh
       openpomodoro-cli
       neofetch
+      libnotify
     ];
   };
 
