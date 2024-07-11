@@ -14,14 +14,14 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import qualified XMonad.StackSet as W
 
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = avoidStruts $ spacingWithEdge 4 $ (tiled ||| Mirror tiled ||| Full)
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1
     ratio   = 1/2
     delta   = 3/100
 
-myWorkspaces = ["main", "dev", "web", "music", "social", "notes", "..."]
+myWorkspaces = ["main", "dev", "web", "music", "social"]
 
 myModMask = mod4Mask
 
@@ -34,11 +34,10 @@ myKeys = [ ((myModMask, xK_r     ), spawn "xmonad --recompile; killall xmobar; x
          ]  
 
 myStartupHook = do
-  spawnOn "web"    "firefox"
+  spawnOn "web"    "brave"
   spawnOn "dev"    "alacritty"
   spawnOn "music"  "spotify"
   spawnOn "social" "telegram-desktop"  
-  spawnOn "notes"  "obsidian"
   
 main = do
   xmproc <- spawnPipe "xmobar ~/.config/xmobar/xmobarrc"

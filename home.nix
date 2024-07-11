@@ -26,7 +26,6 @@
     packages = with pkgs; [
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
       xmobar
-      firefox
       killall
       telegram-desktop
       pavucontrol
@@ -41,16 +40,15 @@
       discord
       lazygit
       obsidian
-      google-chrome
       ripgrep
       rofi-screenshot
       maim
       xclip
       tor-browser
       feh
-      openpomodoro-cli
       neofetch
       libnotify
+      brave
     ];
   };
 

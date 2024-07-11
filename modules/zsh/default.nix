@@ -7,7 +7,6 @@
     enableCompletion = false;
     initExtra = ''
       [[ ! -f ${./p10k.zsh} ]] || source ${./p10k.zsh}
-      neofetch
     '';
     shellAliases = {
       rebuild =
@@ -16,6 +15,7 @@
       shutdown = "systemctl poweroff";
       gswc = "git checkout -b";
       gsw = "git checkout";
+      pomodoro = "~/.pomodoro/pomodoro-clock-cli";
     };
     zplug = {
       enable = true;
