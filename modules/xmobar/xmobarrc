@@ -1,5 +1,5 @@
 Config { font = "JetBrainsMono Nerd Font 10"
-       , additionalFonts = ["JetBrainsMono Nerd Font Bold 10"]
+       , additionalFonts = ["ZedMono Nerd Font Bold 10"]
        , bgColor = "#292929"
        , fgColor = "#3c3c3c"
        , position = TopH 26

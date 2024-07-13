@@ -29,6 +29,8 @@
 
       set -g status-left-length 128
       set-option -g status-position top
+
+      set-option -g default-terminal "screen-256color"
     '';
   };
 }

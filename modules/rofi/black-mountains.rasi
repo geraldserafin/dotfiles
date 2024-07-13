@@ -1,5 +1,5 @@
 configuration {
-  font: "JetBrainsMono Nerd Font 12";
+  font: "ZedMono Nerd Font 12";
 
   drun {
     display-name: "  ";

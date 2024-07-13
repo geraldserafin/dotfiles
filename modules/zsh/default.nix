@@ -12,7 +12,6 @@
       rebuild =
         "sudo nixos-rebuild switch --flake '${config.home.homeDirectory}/repos/dotfiles#default'";
       develop = "nix develop -c zsh";
-      shutdown = "systemctl poweroff";
       gswc = "git checkout -b";
       gsw = "git checkout";
       pomodoro = "~/.pomodoro/pomodoro-clock-cli";

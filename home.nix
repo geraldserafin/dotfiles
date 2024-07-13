@@ -1,8 +1,7 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports = [
-    (import ./modules/wallpaper)
     (import ./modules/xmonad)
     (import ./modules/xmobar)
     (import ./modules/git)
@@ -13,6 +12,7 @@
     (import ./modules/rofi)
     (import ./modules/openpomodoro-cli)
     (import ./modules/dunst)
+    inputs.stylix.homeManagerModules.stylix
   ];
 
   home = {
@@ -24,7 +24,7 @@
     };
     keyboard.variant = "workman";
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      (nerdfonts.override { fonts = [ "JetBrainsMono" "ZedMono" ]; })
       xmobar
       killall
       telegram-desktop
@@ -49,7 +49,26 @@
       neofetch
       libnotify
       brave
+      dconf
+      audacity
     ];
+  };
+
+  stylix = {
+    enable = true;
+    image = ./background-image.jpg;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    targets = {
+      rofi.enable = false;
+      vim.enable = false;
+    };
+    fonts = {
+      sizes = { terminal = 18; };
+      monospace = {
+        name = "ZedMono Nerd Font";
+        package = pkgs.nerdfonts.override { fonts = [ "ZedMono" ]; };
+      };
+    };
   };
 
   services.picom = {
