@@ -19,12 +19,9 @@
     lazygit
     obsidian
     ripgrep
-    rofi-screenshot
     maim
     xclip
-    tor-browser
     feh
-    neofetch
     libnotify
     brave
     dconf
