@@ -11,6 +11,10 @@
       url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    snowfall-flake = {
+      url = "github:snowfallorg/flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix.url = "github:danth/stylix";
   };
 
@@ -19,6 +23,7 @@
       inherit inputs;
       src = ./.;
       snowfall.namespace = "dotfiles";
+      overlays = with inputs; [ snowfall-flake.overlays."package/flake" ];
       systems.modules.nixos = with inputs;
         [ home-manager.nixosModules.default ];
     };
