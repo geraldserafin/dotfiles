@@ -50,12 +50,5 @@
   };
 
   console.keyMap = "pl2";
-
-  users.users.gerald = {
-    isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
-    password = "";
-  };
-
   system.stateVersion = "23.11";
 }
