@@ -1,0 +1,21 @@
+Config { font = "JetBrainsMono Nerd Font 10"
+       , additionalFonts = ["ZedMono Nerd Font Bold 10"]
+       , bgColor = "#292929"
+       , fgColor = "#3c3c3c"
+       , position = TopH 26
+       , lowerOnStart = True
+       , allDesktops = True
+       , overrideRedirect = False
+       , persistent = True
+       , iconRoot = "/home/gerald/.config/xmobar/xbm/"
+       , commands = [ Run Network "enp7s0" ["-t", "<fc=#959595>\xf484 <dev></fc>"] 10
+                    , Run Cpu ["-t", "<fc=#959595>\xf035b <total>%</fc>"] 10
+    		            , Run Date "<fc=#959595>\xf455 %d %b %Y</fc>" "date" 10
+		                , Run Date "<fc=#959595>\xf43a %H:%M</fc>" "time" 10
+                    , Run Com "sh" ["-c", "~/.pomodoro/pomodoro-clock-cli status"] "pomodoroTime" 10
+		                , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %StdinReader% } { <fc=#959595>%pomodoroTime%</fc> | %cpu% | %enp7s0% | %date% | %time% "
+       }

@@ -7,24 +7,19 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix.url = "github:danth/stylix";
   };
 
-  outputs = { nixpkgs, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      nixosConfigurations = {
-        default = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules =
-            [ ./configuration.nix inputs.home-manager.nixosModules.default ];
-        };
-      };
-      devShells.${system}.default = pkgs.mkShell {
-        name = "dotfiles";
-        nativeBuildInputs = with pkgs; [ ghc haskell-language-server ];
-      };
+  outputs = inputs:
+    inputs.snowfall-lib.mkFlake {
+      inherit inputs;
+      src = ./.;
+      snowfall.namespace = "dotfiles";
+      systems.modules.nixos = with inputs;
+        [ home-manager.nixosModules.default ];
     };
 }
