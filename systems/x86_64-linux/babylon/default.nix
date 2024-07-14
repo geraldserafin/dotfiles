@@ -32,8 +32,6 @@
 
   environment.systemPackages = with pkgs; [ snowfallorg.flake ];
 
-  programs = { steam.enable = true; };
-
   time.timeZone = "Europe/Warsaw";
 
   i18n = {
@@ -53,4 +51,6 @@
 
   console.keyMap = "pl2";
   system.stateVersion = "23.11";
+
+  dotfiles = { steam.enable = true; };
 }
