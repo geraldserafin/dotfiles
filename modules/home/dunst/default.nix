@@ -16,6 +16,7 @@ in {
         global = {
           origin = "bottom-right";
           offset = "4x4";
+          frame_width = 2;
         };
       };
     };

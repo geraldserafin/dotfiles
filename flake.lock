@@ -504,11 +504,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1721141734,
-        "narHash": "sha256-rugQCHMeNpPonZAJqq9sPiL5Yate74n/fwrGHzhCPKg=",
+        "lastModified": 1721142188,
+        "narHash": "sha256-sHgd/Ab8Pa4lCRY2HbI5Nmb7mm0bDj9VQXMr541Sbfk=",
         "owner": "geraldserafin",
         "repo": "neovim",
-        "rev": "b8fc464f78b047236f5105db8d9118e9c297f11e",
+        "rev": "c9293e378d5ffd1f8c6d12e3dfb3baa69fb491cb",
         "type": "github"
       },
       "original": {
