@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   home.keyboard.variant = "workman";
@@ -39,7 +39,7 @@
     nvim.enable = true;
     rofi.enable = true;
     tmux.enable = true;
-    xmobar.enable = true;
+    # xmobar.enable = true;
     xmonad.enable = true;
     picom.enable = true;
     zsh.enable = true;

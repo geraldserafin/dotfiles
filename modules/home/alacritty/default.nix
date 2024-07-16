@@ -11,7 +11,10 @@ in {
     programs.alacritty = {
       enable = true;
       settings = {
-        window = { decorations = "None"; };
+        window = {
+          decorations = "None";
+          opacity = lib.mkForce 0.8;
+        };
         env = { TERM = "alacritty-direct"; };
       };
     };

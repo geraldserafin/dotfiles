@@ -12,6 +12,7 @@ import XMonad.Util.Run
 import XMonad.Util.Hacks
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
+import qualified Colors
 import qualified XMonad.StackSet as W
 
 myLayout = avoidStruts $ spacingWithEdge 4 $ (tiled ||| Mirror tiled ||| Full)
@@ -21,7 +22,7 @@ myLayout = avoidStruts $ spacingWithEdge 4 $ (tiled ||| Mirror tiled ||| Full)
     ratio   = 1/2
     delta   = 3/100
 
-myWorkspaces = ["main", "dev", "web", "music", "social"]
+myWorkspaces = ["1:main", "2:dev", "3:web", "4:music", "5:social"]
 
 myModMask = mod4Mask
 
@@ -46,8 +47,8 @@ main = do
     { borderWidth        = 2 
     , terminal           = "alacritty"
     , layoutHook         = myLayout
-    , focusedBorderColor = "#959595"
-    , normalBorderColor  = "#3c3c3c"
+    , focusedBorderColor = Colors.lavender
+    , normalBorderColor  = Colors.base
     , modMask            = myModMask
     , workspaces         = myWorkspaces 
     , startupHook        = myStartupHook
@@ -56,15 +57,10 @@ main = do
     } `additionalKeys` myKeys
 
 myXmobarPP = def
-    { ppCurrent         = xmobarColor color1 "" . wrap "<fn=1>(" ")</fn>"
-    , ppHidden          = xmobarColor color3 ""
-    , ppHiddenNoWindows = xmobarColor color3 ""
-    , ppVisible         = xmobarColor color2 "" . wrap "<fn=1>" "</fn>"
+    { ppCurrent         = xmobarColor Colors.yellow "" . wrap "" "*"
+    , ppVisible         = xmobarColor Colors.yellow "" . wrap "" "-"    
+    , ppHidden          = xmobarColor Colors.surface2 ""
+    , ppHiddenNoWindows = xmobarColor Colors.surface2 ""
     , ppOrder           = \[ws, _, _] -> [ws]
     }
 
-color1 = "#A6A6A6"
-color2 = "#737373"
-color3 = "#404040"
-color4 = "#262626"
-color5 = "#0D0D0D"
