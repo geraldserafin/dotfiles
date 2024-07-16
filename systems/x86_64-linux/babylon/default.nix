@@ -10,8 +10,6 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  sound.enable = true;
-
   hardware.pulseaudio.enable = true;
 
   nixpkgs.config = {
@@ -51,6 +49,8 @@
 
   console.keyMap = "pl2";
   system.stateVersion = "23.11";
+
+  home-manager.backupFileExtension = "backup";
 
   dotfiles = { steam.enable = true; };
 }

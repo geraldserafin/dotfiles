@@ -1,4 +1,4 @@
-{ config, lib, namespace, ... }:
+{ config, lib, namespace, inputs, system, ... }:
 
 let
   inherit (lib.${namespace}) mkBoolOption;
@@ -9,9 +9,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
+    home.packages = [ inputs.neovim.packages.${system}.default ];
   };
 }
