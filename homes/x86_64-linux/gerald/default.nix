@@ -42,6 +42,8 @@
     # xmobar.enable = true;
     xmonad.enable = true;
     picom.enable = true;
+    zsh.makeDefault = true;
     zsh.enable = true;
+    bash.enable = true;
   };
 }

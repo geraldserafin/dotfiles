@@ -4,10 +4,14 @@ let
   inherit (lib.${namespace}) mkBoolOption;
   cfg = config.${namespace}.zsh;
 in {
-  options.${namespace}.zsh.enable = mkBoolOption "Weather to enable zsh";
+  options.${namespace}.zsh = {
+    enable = mkBoolOption "Weather to enable zsh";
+    makeDefault = mkBoolOption "Weather zsh should be the default shell";
+  };
 
   config = lib.mkIf cfg.enable {
-    home.sessionVariables.SHELL = "${pkgs.zsh}/bin/zsh";
+    home.sessionVariables.SHELL =
+      lib.mkIf cfg.makeDefault "${pkgs.zsh}/bin/zsh";
     programs.zsh = {
       enable = true;
       enableCompletion = false;
