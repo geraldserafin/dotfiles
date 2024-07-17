@@ -13,9 +13,11 @@ import XMonad.Util.Hacks
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import qualified Colors
+import Control.Monad
 import qualified XMonad.StackSet as W
+import XMonad.Actions.MouseResize
 
-myLayout = avoidStruts $ spacingWithEdge 4 $ (tiled ||| Mirror tiled ||| Full)
+myLayout = mouseResize $ avoidStruts $ spacingWithEdge 0 $ (tiled ||| Mirror tiled ||| Full)
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1
@@ -44,23 +46,24 @@ main = do
   xmproc <- spawnPipe "xmobar ~/.config/xmobar/xmobarrc"
 
   xmonad $ docks $ ewmhFullscreen $ ewmh def 
-    { borderWidth        = 2 
+    { borderWidth        = 2
     , terminal           = "alacritty"
     , layoutHook         = myLayout
     , focusedBorderColor = Colors.lavender
-    , normalBorderColor  = Colors.base
+    , normalBorderColor  = Colors.surface2
     , modMask            = myModMask
     , workspaces         = myWorkspaces 
     , startupHook        = myStartupHook
     , manageHook         = manageSpawn <+> manageHook def
-    , logHook            = dynamicLogWithPP $ myXmobarPP { ppOutput = hPutStrLn xmproc } 
+    , logHook            = myLogHook xmproc 
     } `additionalKeys` myKeys
 
-myXmobarPP = def
+myLogHook xmproc = dynamicLogWithPP $ def
     { ppCurrent         = xmobarColor Colors.yellow "" . wrap "" "*"
     , ppVisible         = xmobarColor Colors.yellow "" . wrap "" "-"    
     , ppHidden          = xmobarColor Colors.surface2 ""
     , ppHiddenNoWindows = xmobarColor Colors.surface2 ""
-    , ppOrder           = \[ws, _, _] -> [ws]
+    , ppTitle           = xmobarColor Colors.text "" . shorten 100
+    , ppOrder           = \[ws, _, tt] -> [ws, tt]
+    , ppOutput          = hPutStrLn xmproc
     }
-

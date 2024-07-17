@@ -32,7 +32,7 @@
       vim.enable = false;
     };
     fonts = {
-      sizes = { terminal = 18; };
+      sizes = { terminal = 17; };
       monospace = {
         name = "ZedMono Nerd Font";
         package = pkgs.nerdfonts.override { fonts = [ "ZedMono" ]; };

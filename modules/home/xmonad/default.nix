@@ -15,26 +15,28 @@ in {
         enableContribAndExtras = true;
         config = ./xmonad.hs;
         libFiles = {
-          "Colors.hs" = pkgs.writeText "Colors.hs" ''
-            module Colors where
+          "Colors.hs" = pkgs.writeText "Colors.hs"
+            # haskell
+            ''
+              module Colors where
 
-            base = "#${colors.base00}"
-            mantle = "#${colors.base01}"
-            surface0 = "#${colors.base02}"
-            surface1 = "#${colors.base03}"
-            surface2 = "#${colors.base04}"
-            text = "#${colors.base05}"
-            rosewater = "#${colors.base06}"
-            lavender = "#${colors.base07}"
-            red = "#${colors.base08}"
-            peach = "#${colors.base09}"
-            yellow = "#${colors.base0A}"
-            green = "#${colors.base0B}"
-            teal = "#${colors.base0C}"
-            blue = "#${colors.base0D}"
-            mauve = "#${colors.base0E}"
-            flaming = "#${colors.base0F}"
-          '';
+              base = "#${colors.base00}"
+              mantle = "#${colors.base01}"
+              surface0 = "#${colors.base02}"
+              surface1 = "#${colors.base03}"
+              surface2 = "#${colors.base04}"
+              text = "#${colors.base05}"
+              rosewater = "#${colors.base06}"
+              lavender = "#${colors.base07}"
+              red = "#${colors.base08}"
+              peach = "#${colors.base09}"
+              yellow = "#${colors.base0A}"
+              green = "#${colors.base0B}"
+              teal = "#${colors.base0C}"
+              blue = "#${colors.base0D}"
+              mauve = "#${colors.base0E}"
+              flaming = "#${colors.base0F}"
+            '';
         };
       };
     };
