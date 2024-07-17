@@ -36,7 +36,7 @@
       userName = "geraldserafin";
       userEmail = "serafingerald@protonmail.com";
     };
-    nvim.enable = true;
+    neovim.enable = true;
     rofi.enable = true;
     tmux.enable = true;
     xmobar.enable = true;
