@@ -63,7 +63,7 @@ myLogHook xmproc = dynamicLogWithPP $ def
     , ppVisible         = xmobarColor Colors.yellow "" . wrap "" "-"    
     , ppHidden          = xmobarColor Colors.surface2 ""
     , ppHiddenNoWindows = xmobarColor Colors.surface2 ""
-    , ppTitle           = xmobarColor Colors.text "" . shorten 100
+    , ppTitle           = xmobarColor Colors.text "" . shorten 75
     , ppOrder           = \[ws, _, tt] -> [ws, tt]
     , ppOutput          = hPutStrLn xmproc
     }

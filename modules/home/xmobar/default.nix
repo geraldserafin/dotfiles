@@ -28,7 +28,7 @@ in {
                                       , "--normal", "#${colors.base09}"
                                       , "--high"  , "#${colors.base08}"
                                       ] 10
-                            , Run Memory ["--template", " <usedratio>%"] 10
+                            , Run Memory ["-t", "<fc=#${colors.base0C}> <usedratio>%</fc>"] 10
             		            , Run Date "<fc=#${colors.base0D}> %d %b %Y</fc>" "date" 10
         		                , Run Date "<fc=#${colors.base07}>󱑌 %H:%M</fc>"    "time" 10
                             , Run Com "sh" [ "-c", "~/.pomodoro/pomodoro-clock-cli status"] "pomodoroTime" 10
@@ -39,10 +39,11 @@ in {
                , template = " <fc=#${colors.base0E}><fn=1></fn></fc> \
                             \ %StdinReader% } { \
                             \ %pomodoroTime% \
+                            \ %memory% \
                             \ %cpu% \
                             \ %enp7s0% \
-                            \ %time% \
-                            \ %date% "
+                            \ %date% \
+                            \ %time% "
                }
       '';
     home.packages = with pkgs; [ xmobar ];
