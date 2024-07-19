@@ -1,8 +1,15 @@
-{
+{ pkgs, ... }: {
   plugins = {
     luasnip = {
       enable = true;
-      fromVscode = [ { } ];
+      extraConfig = {
+        enable_autosnippets = true;
+        store_selection_keys = "<Tab>";
+      };
+      fromVscode = [{
+        lazyLoad = true;
+        paths = "${pkgs.vimPlugins.friendly-snippets}";
+      }];
     };
     cmp_luasnip.enable = true;
     cmp-nvim-lsp.enable = true;

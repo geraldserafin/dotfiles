@@ -23,6 +23,7 @@
     swapfile = false;
     undofile = true;
     termguicolors = lib.mkForce pkgs.stdenv.isLinux;
+    cmdheight = 0;
   };
 
   globals.mapleader = " ";

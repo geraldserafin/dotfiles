@@ -4,9 +4,9 @@
     sources = {
       formatting = {
         nixfmt.enable = true;
-        prettier.enable = true;
-        prettier.disableTsServerFormatter = false;
+        prettierd.enable = true;
       };
+      completion.luasnip.enable = true;
     };
     settings = {
       on_attach =
@@ -27,8 +27,4 @@
         '';
     };
   };
-  keymaps = [{
-    key = "<leader>f";
-    action = "vim.lsp.buf.format";
-  }];
 }

@@ -7,11 +7,6 @@
     killall
     telegram-desktop
     pavucontrol
-    gcc
-    lua-language-server
-    stylua
-    nixd
-    nixfmt-classic
     zsh-powerlevel10k
     spotify
     postman
