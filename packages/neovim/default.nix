@@ -6,7 +6,6 @@ inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
     imports = [
       ./alpha.nix
       ./autoclose.nix
-      ./auto-save.nix
       ./options.nix
       ./lualine.nix
       ./catppuccin.nix

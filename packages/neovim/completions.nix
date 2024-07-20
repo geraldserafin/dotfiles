@@ -1,31 +1,30 @@
-{ pkgs, ... }: {
+{
   plugins = {
+    lspkind.enable = true;
+    lspkind.cmp.enable = true;
     luasnip = {
       enable = true;
       extraConfig = {
         enable_autosnippets = true;
         store_selection_keys = "<Tab>";
       };
-      fromVscode = [{
-        lazyLoad = true;
-        paths = "${pkgs.vimPlugins.friendly-snippets}";
-      }];
     };
+    friendly-snippets.enable = true;
     cmp_luasnip.enable = true;
     cmp-nvim-lsp.enable = true;
     cmp-buffer.enable = true;
     cmp-path.enable = true;
     cmp = {
       enable = true;
+      autoEnableSources = true;
       settings = {
-        snippet.expand =
-          # lua
-          ''
-            function(args)
-              require("luasnip").lsp_expand(args.body)
-            end
-          '';
         preselect = "cmp.PreselectMode.None";
+        performance = {
+          debounce = 60;
+          fetchingTimeout = 200;
+          maxViewEntries = 30;
+        };
+        snippet.expand = "luasnip";
         window = {
           completion = {
             border = [ "╭" "─" "╮" "│" "╯" "─" "╰" "│" ];
@@ -51,9 +50,17 @@
             "cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select })";
           "<Up>" =
             "cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select })";
+          "<C-k>" =
+            "cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select })";
+          "<C-j>" =
+            "cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select })";
         };
-        sources =
-          [ { name = "nvim_lsp"; } { name = "luasnip"; } { name = "buffer"; } ];
+        sources = [
+          { name = "nvim_lsp"; }
+          { name = "luasnip"; }
+          { name = "buffer"; }
+          { name = "path"; }
+        ];
       };
     };
   };
