@@ -9,10 +9,9 @@ in {
   config = lib.mkIf cfg.enable {
     programs.rofi = {
       enable = true;
-      font = "ZedMono Nerd Font 14";
+      font = lib.mkForce "ZedMono Nerd Font 17";
       location = "center";
       extraConfig = { modi = "window,run,combi,keys,filebrowser"; };
-      theme = ./black-mountains.rasi;
     };
   };
 }

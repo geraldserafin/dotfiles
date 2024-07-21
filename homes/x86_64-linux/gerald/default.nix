@@ -3,7 +3,7 @@
 {
   home.keyboard.variant = "workman";
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "ZedMono" ]; })
+    (nerdfonts.override { fonts = [ "ZedMono" ]; })
     killall
     telegram-desktop
     pavucontrol
