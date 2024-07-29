@@ -26,7 +26,7 @@ myLayout = mouseResize $ avoidStruts $ spacingWithEdge 0 $ (tiled ||| Mirror til
 
 myWorkspaces = ["1:main", "2:dev", "3:web", "4:music", "5:social"]
 
-myModMask = mod4Mask
+myModMask = mod1Mask
 
 myKeys = [ ((myModMask, xK_r     ), spawn "xmonad --recompile; killall xmobar; xmonad --restart")
          , ((myModMask, xK_s     ), spawn "maim -s | xclip -selection clipboard -t image/png"   )

@@ -52,5 +52,8 @@
 
   home-manager.backupFileExtension = "backup";
 
-  dotfiles = { steam.enable = true; };
+  dotfiles = {
+    steam.enable = true;
+    workman.enable = true;
+  };
 }

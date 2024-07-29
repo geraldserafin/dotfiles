@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.keyboard.variant = "workman";
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "ZedMono" ]; })
     killall
@@ -40,5 +39,6 @@
     zsh.makeDefault = true;
     zsh.enable = true;
     bash.enable = true;
+    workman.enable = true;
   };
 }
