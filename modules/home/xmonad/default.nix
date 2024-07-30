@@ -20,23 +20,35 @@ in {
             ''
               module Colors where
 
-              base = "#${colors.base00}"
-              mantle = "#${colors.base01}"
-              surface0 = "#${colors.base02}"
-              surface1 = "#${colors.base03}"
-              surface2 = "#${colors.base04}"
-              text = "#${colors.base05}"
+              base      = "#${colors.base00}"
+              mantle    = "#${colors.base01}"
+              surface0  = "#${colors.base02}"
+              surface1  = "#${colors.base03}"
+              surface2  = "#${colors.base04}"
+              text      = "#${colors.base05}"
               rosewater = "#${colors.base06}"
-              lavender = "#${colors.base07}"
-              red = "#${colors.base08}"
-              peach = "#${colors.base09}"
-              yellow = "#${colors.base0A}"
-              green = "#${colors.base0B}"
-              teal = "#${colors.base0C}"
-              blue = "#${colors.base0D}"
-              mauve = "#${colors.base0E}"
-              flaming = "#${colors.base0F}"
+              lavender  = "#${colors.base07}"
+              red       = "#${colors.base08}"
+              peach     = "#${colors.base09}"
+              yellow    = "#${colors.base0A}"
+              green     = "#${colors.base0B}"
+              teal      = "#${colors.base0C}"
+              blue      = "#${colors.base0D}"
+              mauve     = "#${colors.base0E}"
+              flaming   = "#${colors.base0F}"
             '';
+
+          "Options.hs" = pkgs.writeText "Options.hs"
+            # haskell 
+            ''
+              module Options where 
+
+              import XMonad (mod1Mask)
+
+              modMask  = mod1Mask
+              terminal = "alacritty"            
+            '';
+
         };
       };
     };

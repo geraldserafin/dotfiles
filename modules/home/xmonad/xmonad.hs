@@ -12,10 +12,14 @@ import XMonad.Util.Run
 import XMonad.Util.Hacks
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
-import qualified Colors
 import Control.Monad
-import qualified XMonad.StackSet as W
 import XMonad.Actions.MouseResize
+import XMonad.ManageHook
+import XMonad.Util.SpawnOnce
+import qualified XMonad.StackSet as W
+
+import qualified Colors
+import qualified Options
 
 myLayout = mouseResize $ avoidStruts $ spacingWithEdge 0 $ (tiled ||| Mirror tiled ||| Full)
   where
@@ -24,46 +28,59 @@ myLayout = mouseResize $ avoidStruts $ spacingWithEdge 0 $ (tiled ||| Mirror til
     ratio   = 1/2
     delta   = 3/100
 
-myWorkspaces = ["1:main", "2:dev", "3:web", "4:music", "5:social"]
+ws1 = "1:main"
+ws2 = "2:dev"
+ws3 = "3:web"
+ws4 = "4:music"
+ws5 = "5:social"
 
-myModMask = mod1Mask
+myWorkspaces = [ws1, ws2, ws3, ws4, ws5]
+
+myModMask = Options.modMask
 
 myKeys = [ ((myModMask, xK_r     ), spawn "xmonad --recompile; killall xmobar; xmonad --restart")
          , ((myModMask, xK_s     ), spawn "maim -s | xclip -selection clipboard -t image/png"   )
-         , ((myModMask, xK_Return), spawn "alacritty"       )
+         , ((myModMask, xK_Return), spawn Options.terminal  )
          , ((myModMask, xK_p     ), spawn "rofi -show combi")
-         , ((myModMask, xK_P     ), spawn "pomodoro 25 5")
+         , ((myModMask, xK_P     ), spawn "pomodoro 25 5"   )
          , ((myModMask, xK_q     ), kill                    )
          ]  
 
+myManageHook = composeAll
+  [ className =? "Brave-browser"   --> doShift ws3
+  , className =? "Spotify"         --> doShift ws4
+  , className =? "TelegramDesktop" --> doShift ws5
+  , className =? "discord"         --> doShift ws5
+  ]
+  
 myStartupHook = do
-  spawnOn "web"    "brave"
-  spawnOn "dev"    "alacritty"
-  spawnOn "music"  "spotify"
-  spawnOn "social" "telegram-desktop"  
+  spawnOnce "discord"
+  spawnOnce "telegram-desktop"
+  spawnOnce "spotify"
+  spawnOnce "brave"
   
 main = do
   xmproc <- spawnPipe "xmobar ~/.config/xmobar/xmobarrc"
 
   xmonad $ docks $ ewmhFullscreen $ ewmh def 
     { borderWidth        = 2
-    , terminal           = "alacritty"
-    , layoutHook         = myLayout
+    , terminal           = Options.terminal
     , focusedBorderColor = Colors.lavender
     , normalBorderColor  = Colors.surface2
-    , modMask            = myModMask
+    , modMask            = Options.modMask
+    , layoutHook         = myLayout
     , workspaces         = myWorkspaces 
     , startupHook        = myStartupHook
-    , manageHook         = manageSpawn <+> manageHook def
+    , manageHook         = myManageHook <+> manageHook def
     , logHook            = myLogHook xmproc 
     } `additionalKeys` myKeys
 
 myLogHook xmproc = dynamicLogWithPP $ def
-    { ppCurrent         = xmobarColor Colors.yellow "" . wrap "" "*"
-    , ppVisible         = xmobarColor Colors.yellow "" . wrap "" "-"    
+    { ppCurrent         = xmobarColor Colors.yellow   "" . wrap "" "*"
+    , ppVisible         = xmobarColor Colors.yellow   "" . wrap "" "-"    
     , ppHidden          = xmobarColor Colors.surface2 ""
     , ppHiddenNoWindows = xmobarColor Colors.surface2 ""
-    , ppTitle           = xmobarColor Colors.text "" . shorten 75
+    , ppTitle           = xmobarColor Colors.text     "" . shorten 75
     , ppOrder           = \[ws, _, tt] -> [ws, tt]
     , ppOutput          = hPutStrLn xmproc
     }
