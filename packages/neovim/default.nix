@@ -5,7 +5,6 @@ inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
   module = {
     imports = [
       ./alpha.nix
-      ./autoclose.nix
       ./options.nix
       ./lualine.nix
       ./catppuccin.nix
@@ -19,6 +18,8 @@ inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
       ./zen-mode.nix
       ./oil.nix
       ./markdown-preview.nix
+      ./image.nix
+      # ./nvim-metals.nix
     ];
   };
 }

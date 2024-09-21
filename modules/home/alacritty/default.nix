@@ -18,6 +18,5 @@ in {
         env = { TERM = "alacritty-direct"; };
       };
     };
-    home.sessionVariables.TERMINAL = "alacritty";
   };
 }

@@ -1,4 +1,4 @@
 {
   plugins.markdown-preview.enable = true;
-  plugins.markdown-preview.settings.auto_start = true;
+  plugins.markdown-preview.settings.auto_start = false;
 }

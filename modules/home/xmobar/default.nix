@@ -4,6 +4,7 @@ let
   inherit (lib.${namespace}) mkBoolOption;
   cfg = config.${namespace}.xmobar;
   colors = config.stylix.base16Scheme;
+  fonts = config.stylix.fonts;
 in {
   options.${namespace}.xmobar.enable = mkBoolOption "Weather to enable xmobar";
 
@@ -11,8 +12,8 @@ in {
     xdg.configFile."xmobar/xmobarrc".text =
       # haskell
       ''
-        Config { font = "ZedMono Nerd Font 12"
-               , additionalFonts = [ "ZedMono Nerd Font 24" ]
+        Config { font = "${fonts.monospace.name} 12"
+               , additionalFonts = [ "${fonts.monospace.name} 24" ]
                , bgColor = "#${colors.base01}"
                , fgColor = "#${colors.base04}"
                , position = BottomH 32

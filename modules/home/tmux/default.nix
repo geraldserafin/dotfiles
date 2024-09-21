@@ -34,9 +34,11 @@ in {
         bind r source-file ~/.config/tmux/tmux.conf
 
         set -g status-left-length 128
-        set-option -g status-position top
+        set -g allow-passthrough on
 
-        set-option -g default-terminal "screen-256color"
+        set-option -g status-position top
+        set-option -g default-terminal "tmux-256color"
+        set-option -sa terminal-overrides ',xterm-256color:RGB'
       '';
     };
   };

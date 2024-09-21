@@ -18,6 +18,12 @@
 
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
+    pomodoro-clock-cli.url = "github:geraldserafin/pomodoro-clock-cli";
+    pomodoro-clock-cli.inputs.nixpkgs.follows = "nixpkgs";
+
+    oh-my-bash.url = "github:ohmybash/oh-my-bash";
+    oh-my-bash.flake = false;
   };
 
   outputs = inputs:

@@ -1,4 +1,4 @@
-{ config, lib, namespace, ... }:
+{ config, lib, namespace, inputs, ... }:
 
 let
   inherit (lib.${namespace}) mkBoolOption;
@@ -13,8 +13,31 @@ in {
       shellAliases = {
         gswc = "git checkout -b";
         gsw = "git checkout";
-        pomodoro = "~/.pomodoro/pomodoro-clock-cli";
       };
+      sessionVariables.TERM = "xterm-256color";
+      bashrcExtra =
+        # sh
+        ''
+          export OSH=${inputs.oh-my-bash}
+
+          completions=(
+            git
+            composer
+            ssh
+          )
+
+          aliases=(
+            general
+          )
+
+          plugins=(
+            git
+            bashmarks
+          )
+
+          source $OSH/oh-my-bash.sh
+          source ${./tweaked-lambda.theme.sh}
+        '';
     };
   };
 }

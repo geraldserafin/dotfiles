@@ -46,7 +46,7 @@ in {
               import XMonad (mod1Mask)
 
               modMask  = mod1Mask
-              terminal = "alacritty"            
+              terminal = "${config.home.sessionVariables.TERMINAL}"
             '';
 
         };

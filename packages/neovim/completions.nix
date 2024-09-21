@@ -55,12 +55,8 @@
           "<C-j>" =
             "cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select })";
         };
-        sources = [
-          { name = "nvim_lsp"; }
-          { name = "luasnip"; }
-          { name = "buffer"; }
-          { name = "path"; }
-        ];
+        sources =
+          [ { name = "nvim_lsp"; } { name = "buffer"; } { name = "path"; } ];
       };
     };
   };

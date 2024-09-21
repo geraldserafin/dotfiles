@@ -2,11 +2,9 @@
 
 {
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "ZedMono" ]; })
     killall
     telegram-desktop
     pavucontrol
-    zsh-powerlevel10k
     spotify
     postman
     discord
@@ -20,10 +18,16 @@
     brave
     dconf
     audacity
+    path-of-building
+    jetbrains.idea-community
+    reaper
   ];
+
+  home.sessionVariables.TERMINAL = "kitty";
 
   dotfiles = {
     alacritty.enable = true;
+    kitty.enable = true;
     dunst.enable = true;
     git = {
       enable = true;
@@ -36,9 +40,8 @@
     xmobar.enable = true;
     xmonad.enable = true;
     picom.enable = true;
-    zsh.makeDefault = true;
-    zsh.enable = true;
     bash.enable = true;
     workman.enable = true;
+    pomodoro-clock-cli.enable = true;
   };
 }

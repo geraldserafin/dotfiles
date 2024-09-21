@@ -1,18 +1,13 @@
-{ config, lib, namespace, pkgs, ... }:
+{ config, lib, namespace, ... }:
 
 let
   inherit (lib.${namespace}) mkBoolOption;
   cfg = config.${namespace}.zsh;
   colors = config.stylix.base16Scheme;
 in {
-  options.${namespace}.zsh = {
-    enable = mkBoolOption "Weather to enable zsh";
-    makeDefault = mkBoolOption "Weather zsh should be the default shell";
-  };
+  options.${namespace}.zsh = { enable = mkBoolOption "Weather to enable zsh"; };
 
   config = lib.mkIf cfg.enable {
-    home.sessionVariables.SHELL =
-      lib.mkIf cfg.makeDefault "${pkgs.zsh}/bin/zsh";
     programs.zsh = {
       enable = true;
       enableCompletion = false;
@@ -42,7 +37,6 @@ in {
         develop = "nix develop -c zsh";
         gswc = "git checkout -b";
         gsw = "git checkout";
-        pomodoro = "~/.pomodoro/pomodoro-clock-cli";
       };
       zplug = {
         enable = true;

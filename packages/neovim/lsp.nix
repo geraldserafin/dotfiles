@@ -7,9 +7,13 @@
         tsserver.enable = true;
         svelte.enable = true;
         elixirls.enable = true;
-        hls.enable = true;
+        hls = {
+          enable = true;
+          settings.haskell.formattingProvider = "fourmolu";
+        };
         tailwindcss.enable = true;
         eslint.enable = true;
+        metals.enable = true;
       };
       keymaps = {
         lspBuf = {

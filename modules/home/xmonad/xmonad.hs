@@ -16,6 +16,7 @@ import Control.Monad
 import XMonad.Actions.MouseResize
 import XMonad.ManageHook
 import XMonad.Util.SpawnOnce
+import XMonad.Layout.NoBorders
 import qualified XMonad.StackSet as W
 
 import qualified Colors
@@ -51,6 +52,9 @@ myManageHook = composeAll
   , className =? "Spotify"         --> doShift ws4
   , className =? "TelegramDesktop" --> doShift ws5
   , className =? "discord"         --> doShift ws5
+  , (className =? "awakened-poe-trade" <||> title =? "Awakened PoE Trade" <||> appName =? "awakened-poe-trade") --> doFloat
+  , (className =? "awakened-poe-trade" <||> title =? "Awakened PoE Trade" <||> appName =? "awakened-poe-trade") --> doIgnore
+  , (className =? "awakened-poe-trade" <||> title =? "Awakened PoE Trade" <||> appName =? "awakened-poe-trade") --> hasBorder False  
   ]
   
 myStartupHook = do
