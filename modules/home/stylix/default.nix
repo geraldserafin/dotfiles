@@ -24,9 +24,9 @@
       base0E = "cba6f7"; # mauve
       base0F = "f2cdcd"; # flaming
     };
-    opacity.applications = 0.8;
-    opacity.popups = 0.8;
-    opacity.terminal = 0.8;
+    # opacity.applications = 0.8;
+    # opacity.popups = 0.8;
+    # opacity.terminal = 0.8;
     fonts = {
       sizes = { terminal = 17; };
       monospace = {

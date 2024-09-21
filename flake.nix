@@ -7,6 +7,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    darwin.url = "github:lnl7/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -30,6 +33,7 @@
     inputs.snowfall-lib.mkFlake {
       inherit inputs;
       src = ./.;
+      channels-config.allowUnfree = true;
       snowfall.namespace = "dotfiles";
       overlays = with inputs; [ snowfall-flake.overlays."package/flake" ];
       system.modules.nixos = with inputs;
