@@ -1,72 +1,39 @@
 #! bash oh-my-bash.module
 
-# Emoji-based theme to display source control management and
-# virtual environment info beside the ordinary bash prompt.
+OSH_THEME_GIT_PROMPT_DIRTY="󱓌 "
+OSH_THEME_GIT_PROMPT_CLEAN="󱓏 "
 
-# Theme inspired by:
-#  - Bash_it cupcake theme
-
-# Demo:
-# ╭─ⓔ virtualenv 💁user at 💻 host in 📁directory on (🌿branch {1} ↑1 ↓1 +1 •1 ⌀1 ✗)
-# ╰λ cd .bash-it/themes/lambda
-
-# virtualenv prompts
-VIRTUALENV_CHAR="ⓔ "
-OMB_PROMPT_VIRTUALENV_FORMAT='%s'
-OMB_PROMPT_SHOW_PYTHON_VENV=${OMB_PROMPT_SHOW_PYTHON_VENV:=true}
-
-# SCM prompts
-SCM_NONE_CHAR=""
-SCM_GIT_CHAR="[±] "
-SCM_GIT_BEHIND_CHAR="${_omb_prompt_brown}↓${_omb_prompt_normal}"
-SCM_GIT_AHEAD_CHAR="${_omb_prompt_bold_green}↑${_omb_prompt_normal}"
-SCM_GIT_UNTRACKED_CHAR="⌀"
-SCM_GIT_UNSTAGED_CHAR="${_omb_prompt_bold_olive}•${_omb_prompt_normal}"
-SCM_GIT_STAGED_CHAR="${_omb_prompt_bold_green}+${_omb_prompt_normal}"
-
-SCM_THEME_PROMPT_DIRTY=""
-SCM_THEME_PROMPT_CLEAN=""
-SCM_THEME_PROMPT_PREFIX="("
-SCM_THEME_PROMPT_SUFFIX=")"
-
-# Git status prompts
-GIT_THEME_PROMPT_PREFIX=""
-GIT_THEME_PROMPT_SUFFIX=""
-
-# ICONS =======================================================================
-
-icon_host="@"
-icon_directory=":"
-icon_end="$ "
-icon_branch=""
-
-# extra spaces ensure legiblity in prompt
-
-# FUNCTIONS ===================================================================
-
-# Rename tab
-function tabname {
-  printf '\e]1;%s\a' "$1"
+# Nicely formatted terminal prompt
+function git_branch {
+  local CHAR=$(scm_char)
+  if [[ $CHAR != "$SCM_NONE_CHAR" ]]; then
+    printf '%s' " $(parse_git_dirty)${_omb_prompt_bold_purple}$(git_current_branch)${_omb_prompt_normal}"
+  fi
 }
 
-# Rename window
-function winname {
-  printf '\e]2;%s\a' "$1"
+function nix_shell_prompt() {
+    if [ -n "$IN_NIX_SHELL" ]; then
+        if [ -n "$name" ]; then
+            echo "${_omb_prompt_bold_blue}($name) "
+        else
+            echo "${_omb_prompt_bold_blue}(dev-shell) "
+        fi
+    fi
 }
 
-# PROMPT OUTPUT ===============================================================
+function _omb_theme_PROMPT_COMMAND {
+  local ps_username="${_omb_prompt_purple}\u${_omb_prompt_normal}"
+  local ps_host="${_omb_prompt_olive}\h${_omb_prompt_normal}"
+  local ps_path="${_omb_prompt_bold_teal}\w${_omb_prompt_normal}"
+  local ps_user_mark="${_omb_prompt_bold_red}󰘧${_omb_prompt_normal}"
 
-# Displays the current prompt
-function _omb_theme_PROMPT_COMMAND() {
-  PS1="$_omb_prompt_normal["
-  PS1+=$(_omb_prompt_print_python_venv)
-  PS1+=$_omb_prompt_bold_brown'\u'
-  PS1+=$_omb_prompt_normal$icon_host$_omb_prompt_bold_teal'\h'
-  PS1+=$_omb_prompt_normal$icon_directory$_omb_prompt_bold_purple'\w'
-  PS1+="$_omb_prompt_normal]"
-  PS1+=$_omb_prompt_normal$([[ -n $(_omb_prompt_git branch 2> /dev/null) ]])
-  PS1+=$_omb_prompt_white$(scm_prompt_info)$_omb_prompt_normal$icon_end
+  local python_venv
+  _omb_prompt_get_python_venv
+
+  PS1="$python_venv$(nix_shell_prompt)$ps_path$(git_branch) $ps_user_mark "
 }
 
-# Runs prompt (this bypasses oh-my-bash $PROMPT setting)
+OMB_PROMPT_SHOW_PYTHON_VENV=${OMB_PROMPT_SHOW_PYTHON_VENV:-false}
+OMB_PROMPT_VIRTUALENV_FORMAT="${_omb_prompt_olive}(%s)${_omb_prompt_reset_color} "
+
 _omb_util_add_prompt_command _omb_theme_PROMPT_COMMAND
