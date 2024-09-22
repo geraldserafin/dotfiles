@@ -58,7 +58,7 @@ myManageHook = composeAll
   ]
   
 myStartupHook = do
-  spawnOnce "discord"
+  spawnOnce "vesktop"
   spawnOnce "telegram-desktop"
   spawnOnce "spotify"
   spawnOnce "brave"
