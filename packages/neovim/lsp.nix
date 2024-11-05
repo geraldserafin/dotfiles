@@ -14,6 +14,8 @@
         tailwindcss.enable = true;
         eslint.enable = true;
         metals.enable = true;
+        pylsp.enable = true;
+        clangd.enable = true;
       };
       keymaps = {
         lspBuf = {

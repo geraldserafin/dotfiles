@@ -6,7 +6,6 @@
     telegram-desktop
     spotify
     postman
-    discord
     lazygit
     obsidian
     ripgrep
@@ -30,5 +29,6 @@
     bash.enable = true;
     workman.enable = true;
     pomodoro-clock-cli.enable = true;
+    discord.enable = true;
   };
 }
