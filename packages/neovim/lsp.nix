@@ -16,6 +16,7 @@
         metals.enable = true;
         pylsp.enable = true;
         clangd.enable = true;
+        bashls.enable = true;
       };
       keymaps = {
         lspBuf = {
