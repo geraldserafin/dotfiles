@@ -27,16 +27,16 @@
         snippet.expand = "luasnip";
         window = {
           completion = {
-            border = [ "╭" "─" "╮" "│" "╯" "─" "╰" "│" ];
+            border = "single";
             winhighlight =
               "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:PmenuSel,Search:None";
-            scrollbar = false;
             sidePadding = 0;
           };
-          settings.documentation = {
-            border = [ "╭" "─" "╮" "│" "╯" "─" "╰" "│" ];
+          documentation = {
+            border = "single";
             winhighlight =
               "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:PmenuSel,Search:None";
+            sidePadding = 0;
           };
         };
         mapping = {

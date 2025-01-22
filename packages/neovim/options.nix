@@ -13,7 +13,6 @@
     expandtab = true;
     shiftwidth = 2;
     smartindent = true;
-    tabstop = 2;
     laststatus = 3;
     wrap = false;
     ignorecase = true;

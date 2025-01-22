@@ -16,10 +16,9 @@
     libnotify
     brave
     dconf
-    audacity
     path-of-building
-    jetbrains.idea-community
-    reaper
+    firefox
+
   ];
 
   home.sessionVariables.TERMINAL = "kitty";
@@ -40,8 +39,8 @@
     xmonad.enable = true;
     picom.enable = true;
     bash.enable = true;
-    workman.enable = true;
     pomodoro-clock-cli.enable = true;
     discord.enable = true;
+    zen-browser.enable = true;
   };
 }

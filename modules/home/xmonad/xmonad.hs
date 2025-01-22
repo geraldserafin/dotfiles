@@ -51,10 +51,8 @@ myManageHook = composeAll
   [ className =? "Brave-browser"   --> doShift ws3
   , className =? "Spotify"         --> doShift ws4
   , className =? "TelegramDesktop" --> doShift ws5
-  , className =? "discord"         --> doShift ws5
-  , (className =? "awakened-poe-trade" <||> title =? "Awakened PoE Trade" <||> appName =? "awakened-poe-trade") --> doFloat
-  , (className =? "awakened-poe-trade" <||> title =? "Awakened PoE Trade" <||> appName =? "awakened-poe-trade") --> doIgnore
-  , (className =? "awakened-poe-trade" <||> title =? "Awakened PoE Trade" <||> appName =? "awakened-poe-trade") --> hasBorder False  
+  , className =? "vesktop"         --> doShift ws5
+  , className =? "Emulator"        --> doFloat 
   ]
   
 myStartupHook = do

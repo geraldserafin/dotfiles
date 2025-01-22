@@ -25,6 +25,8 @@
     pomodoro-clock-cli.url = "github:geraldserafin/pomodoro-clock-cli";
     pomodoro-clock-cli.inputs.nixpkgs.follows = "nixpkgs";
 
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
+
     oh-my-bash.url = "github:ohmybash/oh-my-bash";
     oh-my-bash.flake = false;
   };

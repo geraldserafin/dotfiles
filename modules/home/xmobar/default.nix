@@ -32,7 +32,7 @@ in {
                             , Run Memory ["-t", "<fc=#${colors.base0C}> <usedratio>%</fc>"] 10
             		            , Run Date "<fc=#${colors.base0D}> %d %b %Y</fc>" "date" 10
         		                , Run Date "<fc=#${colors.base07}>󱑌 %H:%M</fc>"    "time" 10
-                            , Run Com "sh" [ "-c", "~/.pomodoro/pomodoro-clock-cli status"] "pomodoroTime" 10
+                            , Run Com "sh" [ "-c", "pomodoro status"] "pomodoroTime" 10
         		                , Run StdinReader
                             ]
                , sepChar = "%"
