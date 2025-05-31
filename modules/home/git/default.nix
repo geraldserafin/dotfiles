@@ -17,6 +17,7 @@ in {
       userName = cfg.userName;
       userEmail = cfg.userEmail;
       extraConfig = { credential.helper = "store"; };
+      lfs.enable = true;
     };
   };
 

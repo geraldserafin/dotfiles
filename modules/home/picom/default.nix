@@ -13,6 +13,7 @@ in {
     services.picom = {
       enable = true;
       vSync = true;
+      settings = { blur = { method = "dual_kawase"; }; };
     };
   };
 }

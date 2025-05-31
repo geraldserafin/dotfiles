@@ -3,7 +3,7 @@
 let
   inherit (lib.${namespace}) mkBoolOption;
   cfg = config.${namespace}.xmobar;
-  colors = config.stylix.base16Scheme;
+  colors = config.lib.stylix.colors.withHashtag;
   fonts = config.stylix.fonts;
 in {
   options.${namespace}.xmobar.enable = mkBoolOption "Weather to enable xmobar";
@@ -13,36 +13,41 @@ in {
       # haskell
       ''
         Config { font = "${fonts.monospace.name} 12"
-               , additionalFonts = [ "${fonts.monospace.name} 24" ]
-               , bgColor = "#${colors.base01}"
-               , fgColor = "#${colors.base04}"
+               , additionalFonts = [ "${fonts.monospace.name} 18" ]
+               , bgColor = "${colors.base00}"
+               , fgColor = "${colors.base04}"
                , position = BottomH 32
                , lowerOnStart = True
                , allDesktops = True
                , overrideRedirect = False
                , persistent = True
-               , commands = [ Run Network "enp7s0" ["-t", "<fc=#${colors.base0E}> <dev></fc>"] 10
-                            , Run Cpu [ "-t", "<fc=#${colors.base0B}>󰍛 <total>%</fc>"
+               , commands = [ Run DynNetwork ["-t", "<dev>:<fc=${colors.base0A}><rx>kB/s</fc>|<fc=${colors.base0A}><tx>kB/s</fc>"] 10
+                            , Run Cpu [ "-t", "cpu:<total>%"
                                       , "-L", "25"
-                                      , "-H", "65"
-                                      , "--low"   , "#${colors.base0B}"
-                                      , "--normal", "#${colors.base09}"
-                                      , "--high"  , "#${colors.base08}"
+                                      , "-H", "80"
+                                      , "--low"   , "${colors.base0A}"
+                                      , "--normal", "${colors.base0A}"
+                                      , "--high"  , "${colors.base0A}"
                                       ] 10
-                            , Run Memory ["-t", "<fc=#${colors.base0C}> <usedratio>%</fc>"] 10
-            		            , Run Date "<fc=#${colors.base0D}> %d %b %Y</fc>" "date" 10
-        		                , Run Date "<fc=#${colors.base07}>󱑌 %H:%M</fc>"    "time" 10
-                            , Run Com "sh" [ "-c", "pomodoro status"] "pomodoroTime" 10
-        		                , Run StdinReader
+                            , Run Memory [ "-t", "mem:<usedratio>%"
+                                         , "-L", "25"
+                                         , "-H", "80"
+                                         , "--low"   , "${colors.base0A}"
+                                         , "--normal", "${colors.base0A}"
+                                         , "--high"  , "${colors.base0A}"
+                                         ] 10
+                            , Run Volume "default" "Master" [ "--template" , "vol:<fc=${colors.base0A}><volume></fc>%" ] 10
+            		    , Run Date "%d-%m-%Y" "date" 10
+        		    , Run Date "%H:%M"    "time" 10
+        		    , Run StdinReader
                             ]
                , sepChar = "%"
                , alignSep = "}{"
-               , template = " <fc=#${colors.base0E}><fn=1></fn></fc> \
-                            \ %StdinReader% } { \
-                            \ %pomodoroTime% \
+               , template = " %StdinReader% } { \
                             \ %memory% \
                             \ %cpu% \
-                            \ %enp7s0% \
+                            \ %dynnetwork% \
+                            \ <action=`pavucontrol` button=1>%default:Master%</action> \
                             \ %date% \
                             \ %time% "
                }

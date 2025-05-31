@@ -3,7 +3,7 @@
 let
   inherit (lib.${namespace}) mkBoolOption;
   cfg = config.${namespace}.xmonad;
-  colors = config.stylix.base16Scheme;
+  colors = config.lib.stylix.colors.withHashtag;
 in {
   options.${namespace}.xmonad.enable = mkBoolOption "Weather to enable xmonad";
 
@@ -15,39 +15,35 @@ in {
         enableContribAndExtras = true;
         config = ./xmonad.hs;
         libFiles = {
-          "Colors.hs" = pkgs.writeText "Colors.hs"
-            # haskell
-            ''
-              module Colors where
+          "Colors.hs" = pkgs.writeText "Colors.hs" ''
+            module Colors where
 
-              base      = "#${colors.base00}"
-              mantle    = "#${colors.base01}"
-              surface0  = "#${colors.base02}"
-              surface1  = "#${colors.base03}"
-              surface2  = "#${colors.base04}"
-              text      = "#${colors.base05}"
-              rosewater = "#${colors.base06}"
-              lavender  = "#${colors.base07}"
-              red       = "#${colors.base08}"
-              peach     = "#${colors.base09}"
-              yellow    = "#${colors.base0A}"
-              green     = "#${colors.base0B}"
-              teal      = "#${colors.base0C}"
-              blue      = "#${colors.base0D}"
-              mauve     = "#${colors.base0E}"
-              flaming   = "#${colors.base0F}"
-            '';
+            base00 = "${colors.base00}"
+            base01 = "${colors.base01}"
+            base02 = "${colors.base02}"
+            base03 = "${colors.base03}"
+            base04 = "${colors.base04}"
+            base05 = "${colors.base05}"
+            base06 = "${colors.base06}"
+            base07 = "${colors.base07}"
+            base08 = "${colors.base08}"
+            base09 = "${colors.base09}"
+            base0A = "${colors.base0A}"
+            base0B = "${colors.base0B}"
+            base0C = "${colors.base0C}"
+            base0D = "${colors.base0D}"
+            base0E = "${colors.base0E}"
+            base0F = "${colors.base0F}"
+          '';
 
-          "Options.hs" = pkgs.writeText "Options.hs"
-            # haskell 
-            ''
-              module Options where 
+          "Options.hs" = pkgs.writeText "Options.hs" ''
+            module Options where 
 
-              import XMonad (mod1Mask)
+            import XMonad (mod1Mask)
 
-              modMask  = mod1Mask
-              terminal = "${config.home.sessionVariables.TERMINAL}"
-            '';
+            modMask  = mod1Mask
+            terminal = "${config.home.sessionVariables.TERMINAL}"
+          '';
 
         };
       };

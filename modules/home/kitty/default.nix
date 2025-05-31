@@ -11,12 +11,12 @@ in {
   config = lib.mkIf cfg.enable {
     programs.kitty = {
       enable = true;
-      theme = "Catppuccin-Mocha";
       shellIntegration.enableBashIntegration = true;
       settings = {
         confirm_os_window_close = 0;
         enable_audio_bell = false;
         cursor_shape = "beam";
+        disable_ligatures = "always";
       };
     };
   };

@@ -4,7 +4,10 @@
     sources = {
       formatting = {
         nixfmt.enable = true;
-        prettierd.enable = true;
+        prettierd = {
+          enable = true;
+          disableTsServerFormatter = true;
+        };
       };
       completion.luasnip.enable = true;
     };
@@ -13,14 +16,14 @@
         # lua
         ''
           function(client, bufnr)
-          		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-          		vim.api.nvim_create_autocmd("BufWritePre", {
-          			group = augroup,
-          			buffer = bufnr,
-          			callback = function()
-          				vim.lsp.buf.format()
-          			end
-          	  })
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    vim.lsp.buf.format({ bufnr = bufnr })
+                end,
+            })
           end
         '';
     };

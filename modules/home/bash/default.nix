@@ -1,10 +1,10 @@
-{ config, lib, namespace, inputs, ... }:
+{ config, lib, namespace, ... }:
 
 let
   inherit (lib.${namespace}) mkBoolOption;
   cfg = config.${namespace}.bash;
 in {
-  options.${namespace}.bash.enable = mkBoolOption "Weather to enable bash";
+  options.${namespace}.bash.enable = mkBoolOption "Wether to enable bash";
 
   config = lib.mkIf cfg.enable {
     programs.bash = {
@@ -18,29 +18,14 @@ in {
         TERM = "xterm-256color";
         BASH_SILENCE_DEPRECATION_WARNING = 1;
       };
-      bashrcExtra =
-        # sh
-        ''
-          export OSH=${inputs.oh-my-bash}
-
-          completions=(
-            git
-            composer
-            ssh
-          )
-
-          aliases=(
-            general
-          )
-
-          plugins=(
-            git
-            bashmarks
-          )
-
-          source $OSH/oh-my-bash.sh
-          source ${./tweaked-lambda.theme.sh}
-        '';
+      initExtra = ''
+        PS1='[\u@\h:\w]\$ '
+      '';
+      bashrcExtra = ''
+        if [[ -f ~/.keys.sh ]]; then
+          source ~/.keys.sh
+        fi
+      '';
     };
   };
 }

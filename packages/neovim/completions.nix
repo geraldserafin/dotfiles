@@ -2,13 +2,7 @@
   plugins = {
     lspkind.enable = true;
     lspkind.cmp.enable = true;
-    luasnip = {
-      enable = true;
-      extraConfig = {
-        enable_autosnippets = true;
-        store_selection_keys = "<Tab>";
-      };
-    };
+    luasnip.enable = true;
     friendly-snippets.enable = true;
     cmp_luasnip.enable = true;
     cmp-nvim-lsp.enable = true;

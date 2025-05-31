@@ -6,11 +6,12 @@
     efi.canTouchEfiVariables = true;
   };
 
-  networking = { networkmanager.enable = true; };
+  networking = {
+    nameservers = [ "8.8.8.8" "1.1.1.1" ]; # Google + Cloudflare DNS
+    enableIPv6 = false;
+  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  hardware.pulseaudio.enable = true;
 
   nixpkgs.config = {
     pulseaudio = true;
@@ -18,6 +19,7 @@
   };
 
   services = {
+    pulseaudio.enable = false;
     xserver = {
       enable = true;
       displayManager.session = [{
@@ -50,7 +52,8 @@
   console.keyMap = "pl2";
   system.stateVersion = "23.11";
 
-  home-manager.backupFileExtension = "backup";
+  home-manager.backupFileExtension = "home-backup";
+  home-manager.useGlobalPkgs = false;
 
   dotfiles = {
     steam.enable = true;

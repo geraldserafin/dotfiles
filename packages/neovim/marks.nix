@@ -1,0 +1,4 @@
+{ ... }: {
+  plugins.marks.enable = true;
+
+}

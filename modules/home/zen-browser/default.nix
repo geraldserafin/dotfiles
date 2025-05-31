@@ -8,6 +8,6 @@ in {
     mkBoolOption "Weather to enable zen-browser";
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ inputs.zen-browser.packages."${system}".default ];
+    home.packages = [ inputs.zen-browser.packages."${system}".twilight ];
   };
 }

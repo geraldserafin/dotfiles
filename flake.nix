@@ -25,10 +25,16 @@
     pomodoro-clock-cli.url = "github:geraldserafin/pomodoro-clock-cli";
     pomodoro-clock-cli.inputs.nixpkgs.follows = "nixpkgs";
 
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     oh-my-bash.url = "github:ohmybash/oh-my-bash";
     oh-my-bash.flake = false;
+
+    base16-black-metal-scheme.url =
+      "github:metalelf0/base16-black-metal-scheme";
+    base16-black-metal-scheme.flake = false;
+
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs = inputs:

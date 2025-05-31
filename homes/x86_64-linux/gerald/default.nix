@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, inputs, config, ... }:
 
 {
+  imports = [ inputs.sops-nix.homeManagerModules.sops ];
+
   home.packages = with pkgs; [
     killall
     telegram-desktop
@@ -17,11 +19,18 @@
     brave
     dconf
     path-of-building
-    firefox
-
+    vscode
+    godot
+    sops
+    ncmpc
   ];
 
-  home.sessionVariables.TERMINAL = "kitty";
+  home.sessionVariables = { TERMINAL = "kitty"; };
+
+  home.activation.cleanupBackups =
+    lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+      $DRY_RUN_CMD find  $HOME -name "*.home-backup" -type f -delete
+    '';
 
   dotfiles = {
     alacritty.enable = true;
@@ -33,14 +42,27 @@
       userEmail = "serafingerald@protonmail.com";
     };
     neovim.enable = true;
+    neovim.defaultEditor = true;
     rofi.enable = true;
     tmux.enable = true;
     xmobar.enable = true;
     xmonad.enable = true;
     picom.enable = true;
     bash.enable = true;
-    pomodoro-clock-cli.enable = true;
     discord.enable = true;
     zen-browser.enable = true;
+    direnv.enable = true;
+    ncspot.enable = true;
+    mopidy.enable = true;
+    ncmpcpp.enable = true;
+  };
+
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+    secrets = {
+      spotify-client-id = { };
+      spotify-client-secret = { };
+    };
   };
 }

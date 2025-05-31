@@ -28,6 +28,7 @@ in {
             set -g @continuum-save-interval '10' # minutes
           '';
         }
+        { plugin = tmuxPlugins.vim-tmux-navigator; }
       ];
       extraConfig = ''
         unbind r

@@ -1,6 +1,8 @@
 { lib, pkgs, ... }:
 
 {
+  plugins.web-devicons.enable = false;
+
   opts = {
     updatetime = 100;
     number = true;
@@ -13,7 +15,6 @@
     expandtab = true;
     shiftwidth = 2;
     smartindent = true;
-    laststatus = 3;
     wrap = false;
     ignorecase = true;
     incsearch = true;
@@ -22,7 +23,6 @@
     swapfile = false;
     undofile = true;
     termguicolors = lib.mkForce pkgs.stdenv.isLinux;
-    cmdheight = 0;
   };
 
   globals.mapleader = " ";

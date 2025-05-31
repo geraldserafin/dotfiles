@@ -14,6 +14,8 @@
         end
       '';
     };
+    settings.defaults.borderchars = [ "─" "│" "─" "│" "┌" "┐" "┘" "└" ];
+    settings.defaults.disable_devicons = true;
     settings.extensions.__raw =
       "{ ['ui-select'] = { require('telescope.themes').get_dropdown() } }";
   };
