@@ -9,8 +9,9 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.keyboard = {
-      layout = "workman_pl";
-      options = [ "caps:escape" ];
+      layout = "us";
+      variant = "workman";
+      options = [ "caps:enter" ];
     };
   };
 }

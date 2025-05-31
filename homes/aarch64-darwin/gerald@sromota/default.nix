@@ -13,6 +13,8 @@
     dconf
     arc-browser
     snowfallorg.flake
+    google-chrome
+    dosbox-x
   ];
 
   home.sessionVariables.TERMINAL = "kitty";

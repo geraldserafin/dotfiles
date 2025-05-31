@@ -8,6 +8,8 @@
           enable = true;
           disableTsServerFormatter = true;
         };
+        prettierd.enable = true;
+        clang_format.enable = true;
       };
       completion.luasnip.enable = true;
     };
