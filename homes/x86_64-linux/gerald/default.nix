@@ -3,6 +3,9 @@
 {
   imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
+  programs.home-manager.enable = true;
+
+  home.stateVersion = "23.11";
   home.packages = with pkgs; [
     killall
     telegram-desktop
@@ -31,6 +34,9 @@
     lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
       $DRY_RUN_CMD find  $HOME -name "*.home-backup" -type f -delete
     '';
+
+  nixpkgs.config.allowUnfree = true;
+  fonts.fontconfig.enable = true;
 
   dotfiles = {
     alacritty.enable = true;

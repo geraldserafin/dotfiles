@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  programs.home-manager.enable = true;
+
   home.packages = with pkgs; [
     killall
     telegram-desktop
@@ -13,11 +15,12 @@
     dconf
     arc-browser
     snowfallorg.flake
-    google-chrome
-    dosbox-x
   ];
 
   home.sessionVariables.TERMINAL = "kitty";
+  home.stateVersion = "23.11";
+
+  fonts.fontconfig.enable = true;
 
   dotfiles = {
     kitty.enable = true;
@@ -28,9 +31,7 @@
     };
     neovim.enable = true;
     tmux.enable = true;
-    bash.enable = true;
-    workman.enable = true;
-    pomodoro-clock-cli.enable = true;
+    zsh.enable = true;
     discord.enable = true;
   };
 }

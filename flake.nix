@@ -14,7 +14,6 @@
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     snowfall-flake.url = "github:snowfallorg/flake";
-    snowfall-flake.inputs.nixpkgs.follows = "nixpkgs";
 
     stylix.url = "github:danth/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +25,7 @@
     pomodoro-clock-cli.inputs.nixpkgs.follows = "nixpkgs";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
     oh-my-bash.url = "github:ohmybash/oh-my-bash";
     oh-my-bash.flake = false;
@@ -35,6 +35,7 @@
     base16-black-metal-scheme.flake = false;
 
     sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs:
