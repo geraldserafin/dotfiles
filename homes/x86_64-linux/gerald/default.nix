@@ -59,8 +59,7 @@
     zen-browser.enable = true;
     direnv.enable = true;
     ncspot.enable = true;
-    mopidy.enable = true;
-    ncmpcpp.enable = true;
+    starship.enable = true;
   };
 
   sops = {
