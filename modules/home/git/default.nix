@@ -16,7 +16,10 @@ in {
       enable = true;
       userName = cfg.userName;
       userEmail = cfg.userEmail;
-      extraConfig = { credential.helper = "store"; };
+      extraConfig = {
+        url."ssh://git@host".insteadOf = "https://github.com/";
+
+      };
       lfs.enable = true;
     };
   };
