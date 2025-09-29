@@ -1,12 +1,14 @@
-{ config, lib, namespace, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
-let
-  inherit (lib.${namespace}) mkBoolOption;
-  cfg = config.${namespace}.tmux;
-in {
-  options.${namespace}.tmux.enable = mkBoolOption "Weather to enable Tmux";
+lib.dotfiles.mkModule "tmux" config {
+  options = {
+    shell = lib.mkOption {
+      description = "The shell to be used within tmux";
 
-  config = lib.mkIf cfg.enable {
+    };
+  };
+
+  config = {
     programs.tmux = {
       enable = true;
       mouse = true;

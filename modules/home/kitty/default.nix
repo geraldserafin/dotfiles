@@ -1,14 +1,7 @@
 { config, lib, namespace, ... }:
 
-let
-  inherit (lib.${namespace}) mkBoolOption;
-  cfg = config.${namespace}.kitty;
-in {
-  options.${namespace}.kitty = {
-    enable = mkBoolOption "Wather to enable Kitty";
-  };
-
-  config = lib.mkIf cfg.enable {
+lib.${namespace}.mkModule "kitty" config {
+  config = {
     programs.kitty = {
       enable = true;
       shellIntegration.enableBashIntegration = true;
@@ -18,6 +11,7 @@ in {
         enable_audio_bell = false;
         cursor_shape = "beam";
         disable_ligatures = "always";
+        shell = "/home/gerald/.nix-profile/bin/nu";
       };
     };
   };

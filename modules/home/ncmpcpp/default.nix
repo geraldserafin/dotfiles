@@ -1,12 +1,7 @@
 { config, lib, namespace, ... }:
 
-let
-  inherit (lib.${namespace}) mkBoolOption;
-  cfg = config.${namespace}.ncmpcpp;
-in {
-  options.${namespace}.ncmpcpp.enable = mkBoolOption "Wether to enable ncmpmpp";
-
-  config = lib.mkIf cfg.enable {
+lib.${namespace}.mkModule "ncmpcpp" config {
+  config = {
     programs.ncmpcpp = {
       enable = true;
       settings = {

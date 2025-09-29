@@ -29,6 +29,7 @@ in inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
       ./tmux-navigator.nix
       ./marks.nix
       ./harpoon.nix
+      ./ts-autotag.nix
     ];
 
     extraPlugins = [ black-metal-theme ];

@@ -1,24 +1,20 @@
-{ config, lib, namespace, ... }:
+{ config, lib, namespace, specialArgs, ... }@args:
 
-let
-  inherit (lib.${namespace}) mkBoolOption mkStringOption;
-  cfg = config.${namespace}.git;
-  user = config.${namespace}.user;
-in {
-  options.${namespace}.git = {
-    enable = mkBoolOption "Weather to enable Git";
+builtins.trace "ARGS: ${toString (builtins.attrNames specialArgs)}"
+lib.${namespace}.mkModule "git" config {
+  options = with lib.${namespace}; {
     userName = mkStringOption user.name "A name to be used.";
     userEmail = mkStringOption user.email "An email to be used.";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     programs.git = {
       enable = true;
-      userName = cfg.userName;
-      userEmail = cfg.userEmail;
+      userName = config.${namespace}.git.userName;
+      userEmail = config.${namespace}.git.userEmail;
       extraConfig = {
-        url."ssh://git@host".insteadOf = "https://github.com/";
-
+        credential.helper = "store";
+        url."ssh://git@host".insteadOf = "otherhost";
       };
       lfs.enable = true;
     };

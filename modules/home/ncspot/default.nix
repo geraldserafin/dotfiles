@@ -1,14 +1,7 @@
 { config, lib, namespace, pkgs, ... }:
 
-let
-  inherit (lib.${namespace}) mkBoolOption;
-  cfg = config.${namespace}.ncspot;
-in {
-  options.${namespace}.ncspot = {
-    enable = mkBoolOption "Wether to enable ncspot";
-  };
-
-  config = lib.mkIf cfg.enable {
+lib.${namespace}.mkModule "ncspot" config {
+  config = {
     programs.ncspot = {
       enable = true;
       package = pkgs.ncspot.override { withCover = true; };

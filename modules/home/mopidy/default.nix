@@ -1,14 +1,9 @@
 { inputs, config, lib, namespace, pkgs, ... }:
 
-let
-  inherit (lib.${namespace}) mkBoolOption;
-  cfg = config.${namespace}.mopidy;
-in {
+lib.${namespace}.mkModule "mopidy" config {
   imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
-  options.${namespace}.mopidy.enable = mkBoolOption "Wether to enable mopidy";
-
-  config = lib.mkIf cfg.enable {
+  config = {
     home.packages = with pkgs; [ mpc-cli ];
     services.mopidy = {
       enable = true;

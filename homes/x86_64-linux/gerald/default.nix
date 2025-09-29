@@ -1,6 +1,7 @@
-{ pkgs, lib, inputs, config, ... }:
+{ pkgs, lib, inputs, config, namespace, ... }:
 
-{
+let inherit (lib.${namespace}) enabled disabled;
+in {
   imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
   programs.home-manager.enable = true;
@@ -23,9 +24,12 @@
     dconf
     path-of-building
     vscode
-    godot
     sops
-    ncmpc
+    claude-code
+    gemini-cli
+    livebook
+    tree
+    postman
   ];
 
   home.sessionVariables = { TERMINAL = "kitty"; };
@@ -39,27 +43,34 @@
   fonts.fontconfig.enable = true;
 
   dotfiles = {
-    alacritty.enable = true;
-    kitty.enable = true;
-    dunst.enable = true;
-    git = {
-      enable = true;
+    alacritty = disabled;
+    bash = enabled;
+    direnv = enabled;
+    dunst = enabled;
+    git = enabled // {
       userName = "geraldserafin";
       userEmail = "serafingerald@protonmail.com";
     };
-    neovim.enable = true;
-    neovim.defaultEditor = true;
-    rofi.enable = true;
-    tmux.enable = true;
-    xmobar.enable = true;
-    xmonad.enable = true;
-    picom.enable = true;
-    bash.enable = true;
-    discord.enable = true;
-    zen-browser.enable = true;
-    direnv.enable = true;
-    ncspot.enable = true;
-    starship.enable = true;
+    helix = disabled;
+    kitty = enabled;
+    mopidy = disabled;
+    mpd = disabled;
+    ncmpcpp = disabled;
+    ncspot = disabled;
+    neovim = enabled;
+    nushell = enabled;
+    picom = enabled;
+    pomodoro-clock-cli = disabled;
+    rmpc = disabled;
+    rofi = enabled;
+    starship = enabled;
+    tmux = enabled;
+    vesktop = enabled;
+    workman = disabled;
+    xmobar = enabled;
+    xmonad = enabled;
+    zen-browser = enabled;
+    zsh = disabled;
   };
 
   sops = {
@@ -68,6 +79,7 @@
     secrets = {
       spotify-client-id = { };
       spotify-client-secret = { };
+      deepseek-api-key = { };
     };
   };
 }

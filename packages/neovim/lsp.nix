@@ -9,14 +9,7 @@
         svelte.enable = true;
         elixirls = {
           enable = true;
-          settings = {
-            elixirLS = {
-              dialyzerEnabled = false;
-              enableTestLenses = false;
-              mixTarget = "local";
-              formatterOptions = { autoParentheses = false; };
-            };
-          };
+          settings.elixirLS.formatterOptions = { autoParentheses = false; };
         };
         hls = {
           enable = true;
@@ -24,7 +17,6 @@
           installGhc = false;
         };
         tailwindcss.enable = true;
-        eslint.enable = true;
         metals.enable = true;
         pylsp.enable = true;
         clangd.enable = true;

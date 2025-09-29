@@ -42,6 +42,7 @@
     inputs.snowfall-lib.mkFlake {
       inherit inputs;
       src = ./.;
+      specialArgs = { elo = 42; };
       channels-config.allowUnfree = true;
       snowfall.namespace = "dotfiles";
       overlays = with inputs; [ snowfall-flake.overlays."package/flake" ];

@@ -1,16 +1,11 @@
-{ config, lib, namespace, pkgs, ... }:
+{ config, lib, namespace, pkgs, ... }@args:
 
 let
-  inherit (lib.${namespace}) mkBoolOption;
-  cfg = config.${namespace}.neovim;
-in {
-  options.${namespace}.neovim = {
-    enable = mkBoolOption "Weather to enable neovim";
-    defaultEditor = mkBoolOption "Should neovim be the default editor";
-  };
-
-  config = lib.mkIf cfg.enable {
+  _ = builtins.trace
+    "Available args: ${builtins.toJSON (builtins.attrNames args)}" null;
+in lib.${namespace}.mkModule "neovim" config {
+  config = {
     home.packages = with pkgs; [ dotfiles.neovim ];
-    home.sessionVariables = lib.mkIf cfg.defaultEditor { EDITOR = "nvim"; };
+    home.sessionVariables = { EDITOR = "nvim"; };
   };
 }

@@ -1,13 +1,8 @@
 { config, lib, namespace, pkgs, ... }:
 
-let
-  inherit (lib.${namespace}) mkBoolOption;
-  cfg = config.${namespace}.mpd;
-  fifoPath = "/tmp/spotify.fifo";
-in {
-  options.${namespace}.mpd.enable = mkBoolOption "Wether to enable mpd";
-
-  config = lib.mkIf cfg.enable {
+let fifoPath = "/tmp/spotify.fifo";
+in lib.${namespace}.mkModule "mpd" config {
+  config = {
     home.packages = with pkgs; [ mpc-cli ];
     services.librespot = {
       enable = true;

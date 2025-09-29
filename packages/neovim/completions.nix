@@ -2,9 +2,6 @@
   plugins = {
     lspkind.enable = true;
     lspkind.cmp.enable = true;
-    luasnip.enable = true;
-    friendly-snippets.enable = true;
-    cmp_luasnip.enable = true;
     cmp-nvim-lsp.enable = true;
     cmp-buffer.enable = true;
     cmp-path.enable = true;
@@ -18,7 +15,6 @@
           fetchingTimeout = 200;
           maxViewEntries = 30;
         };
-        snippet.expand = "luasnip";
         window = {
           completion = {
             border = "single";

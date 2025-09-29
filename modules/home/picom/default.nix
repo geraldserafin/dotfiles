@@ -1,19 +1,11 @@
-{ config, lib, namespace, ... }:
+{ config, lib, ... }:
 
-let
-  inherit (lib.${namespace}) mkBoolOption;
-  cfg = config.${namespace}.picom;
-in {
-
-  options.${namespace}.picom = {
-    enable = mkBoolOption "Weather to enable Picom";
-  };
-
-  config = lib.mkIf cfg.enable {
+lib.dotfiles.mkModule "picom" config {
+  config = {
     services.picom = {
       enable = true;
       vSync = true;
-      settings = { blur = { method = "dual_kawase"; }; };
+      settings.blur.method = "dual_kawase";
     };
   };
 }
