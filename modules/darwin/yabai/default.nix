@@ -13,7 +13,11 @@ in {
       config = {
         layout = "bsp";
         window_placement = "second_child";
-        padding = 10;
+        top_padding = 10;
+        bottom_padding = 10;
+        left_padding = 10;
+        right_padding = 10;
+        window_gap = 10;
       };
     };
   };

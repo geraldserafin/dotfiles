@@ -24,7 +24,6 @@ in inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
       ./oil.nix
       ./markdown-preview.nix
       ./image.nix
-      ./avante.nix
       ./keymaps.nix
       ./tmux-navigator.nix
       ./marks.nix

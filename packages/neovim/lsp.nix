@@ -15,6 +15,7 @@
           enable = true;
           settings.haskell.formattingProvider = "fourmolu";
           installGhc = false;
+          cmd = [ "haskell-language-server-wrapper" "--lsp" ];
         };
         tailwindcss.enable = true;
         metals.enable = true;
@@ -34,6 +35,7 @@
           };
         };
         asm_lsp.enable = true;
+        volar.enable = true;
       };
       keymaps = {
         lspBuf = {

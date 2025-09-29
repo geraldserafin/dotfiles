@@ -1,6 +1,6 @@
 {
   plugins.avante = {
-    enable = true;
+    enable = false;
     settings = {
       provider = "deepseek";
       providers = {

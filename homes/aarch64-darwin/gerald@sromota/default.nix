@@ -13,7 +13,6 @@
     ripgrep
     libnotify
     dconf
-    arc-browser
     snowfallorg.flake
   ];
 
@@ -33,5 +32,6 @@
     tmux.enable = true;
     zsh.enable = true;
     discord.enable = true;
+    direnv.enable = true;
   };
 }

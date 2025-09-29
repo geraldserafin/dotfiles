@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ ... }:
 
 {
   plugins.web-devicons.enable = false;
@@ -22,7 +22,7 @@
     wildmode = "list:longest";
     swapfile = false;
     undofile = true;
-    termguicolors = lib.mkForce pkgs.stdenv.isLinux;
+    termguicolors = true;
   };
 
   globals.mapleader = " ";
