@@ -36,6 +36,9 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    live-preview-nvim.url = "github:brianhuster/live-preview.nvim";
+    live-preview-nvim.flake = false;
   };
 
   outputs = inputs:

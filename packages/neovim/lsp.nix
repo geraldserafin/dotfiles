@@ -35,7 +35,7 @@
           };
         };
         asm_lsp.enable = true;
-        volar.enable = true;
+        cssls.enable = true;
       };
       keymaps = {
         lspBuf = {
@@ -62,14 +62,7 @@
             }
           )
 
-          vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-            vim.lsp.handlers.signature_help, {
-              border = 'single'
-            }
-          )
-
           vim.keymap.set("n", "<leader>d", function() vim.lsp.buf.hover{ border = _border } end)
-          vim.keymap.set("n", "<leader>e", function() vim.lsp.buf.signature_help{border = _border} end)
 
           vim.diagnostic.config {
             float = { border = border },
@@ -80,6 +73,15 @@
             signs = true,
             underline = true,
           }
+
+          vim.keymap.set("n", "<leader>e", function()
+            vim.diagnostic.open_float(nil, {
+              focusable = false,
+              border = _border,
+              source = "always",
+              prefix = "",
+            })
+          end)
         '';
     };
   };

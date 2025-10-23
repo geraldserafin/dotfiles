@@ -1,6 +1,12 @@
 { config, lib, namespace, ... }:
 
-lib.${namespace}.mkModule "kitty" config {
+let conf = config.${namespace}.kitty;
+in lib.${namespace}.mkModule "kitty" config {
+  options = with lib.${namespace}; {
+    setAsDefault =
+      mkBoolOption "Sets the TERMINAL variable to kitty when true.";
+  };
+
   config = {
     programs.kitty = {
       enable = true;
@@ -11,8 +17,9 @@ lib.${namespace}.mkModule "kitty" config {
         enable_audio_bell = false;
         cursor_shape = "beam";
         disable_ligatures = "always";
-        shell = "/home/gerald/.nix-profile/bin/nu";
       };
     };
+
+    home.sessionVariables = lib.mkIf conf.setAsDefault { TERMINAL = "kitty"; };
   };
 }

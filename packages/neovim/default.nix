@@ -5,6 +5,7 @@ let
     version = "master";
     src = inputs.base16-black-metal-scheme;
   };
+
 in inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
   inherit pkgs;
   module = {

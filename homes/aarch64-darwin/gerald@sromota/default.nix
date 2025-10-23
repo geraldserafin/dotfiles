@@ -1,19 +1,18 @@
-{ pkgs, ... }:
+{ pkgs, lib, namespace, ... }:
 
-{
+let inherit (lib.${namespace}) enabled;
+in {
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
     killall
-    telegram-desktop
-    spotify
-    postman
     lazygit
-    obsidian
     ripgrep
     libnotify
     dconf
     snowfallorg.flake
+    yazi
+    gemini-cli
   ];
 
   home.sessionVariables.TERMINAL = "kitty";
@@ -22,16 +21,15 @@
   fonts.fontconfig.enable = true;
 
   dotfiles = {
-    kitty.enable = true;
-    git = {
-      enable = true;
+    kitty = enabled;
+    git = enabled // {
       userName = "geraldserafin";
       userEmail = "serafingerald@protonmail.com";
     };
-    neovim.enable = true;
-    tmux.enable = true;
-    zsh.enable = true;
-    discord.enable = true;
-    direnv.enable = true;
+    neovim = enabled;
+    tmux = enabled;
+    zsh = enabled;
+    starship = enabled;
+    direnv = enabled;
   };
 }

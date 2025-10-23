@@ -11,7 +11,6 @@
         clang_format.enable = true;
         xmllint.enable = true;
       };
-      completion.luasnip.enable = true;
     };
     settings = {
       on_attach =

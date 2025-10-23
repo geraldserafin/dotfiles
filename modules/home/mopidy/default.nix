@@ -27,10 +27,10 @@ lib.${namespace}.mkModule "mopidy" config {
       extraConfigFiles = [ config.sops.templates."mopidy-spotify.conf".path ];
     };
 
-    sops.templates."mopidy-spotify.conf".content = ''
-      [spotify]
-      client_id = ${config.sops.placeholder.spotify-client-id}
-      client_secret = ${config.sops.placeholder.spotify-client-secret}
-    '';
+    # sops.templates."mopidy-spotify.conf".content = ''
+    #    [spotify]
+    #    client_id = ${config.sops.placeholder.spotify-client-id}
+    #    client_secret = ${config.sops.placeholder.spotify-client-secret}
+    #  '';
   };
 }

@@ -6,6 +6,4 @@
     enableKeyMapping = true;
     remapCapsLockToEscape = true;
   };
-
-  nix.settings.download-buffer-size = 536870912; # 512MB
 }
