@@ -2,7 +2,7 @@
   plugins = {
     lsp = {
       enable = true;
-      inlayHints = true;
+      # inlayHints = true;
       servers = {
         nixd.enable = true;
         ts_ls.enable = true;
@@ -13,15 +13,21 @@
         };
         hls = {
           enable = true;
+          packageFallback = true;
+          installGhc = true;
           settings.haskell.formattingProvider = "fourmolu";
-          installGhc = false;
-          cmd = [ "haskell-language-server-wrapper" "--lsp" ];
         };
         tailwindcss.enable = true;
         metals.enable = true;
         pylsp.enable = true;
         clangd.enable = true;
         bashls.enable = true;
+        rust_analyzer = {
+          enable = true;
+          packageFallback = true;
+          installCargo = true;
+          installRustc = true;
+        };
         jdtls = {
           enable = true;
           settings.java = {
@@ -34,8 +40,13 @@
             };
           };
         };
+        ruff.enable = true;
         asm_lsp.enable = true;
         cssls.enable = true;
+        tinymist = {
+          enable = true;
+          packageFallback = true;
+        };
       };
       keymaps = {
         lspBuf = {

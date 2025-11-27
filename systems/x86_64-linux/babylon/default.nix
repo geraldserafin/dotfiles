@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
   imports = [ ./hardware-configuration.nix ];
 
   boot.loader = {
@@ -29,8 +29,6 @@
       }];
     };
   };
-
-  environment.systemPackages = with pkgs; [ snowfallorg.flake ];
 
   time.timeZone = "Europe/Warsaw";
 

@@ -13,8 +13,6 @@
     snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
-    snowfall-flake.url = "github:snowfallorg/flake";
-
     stylix.url = "github:danth/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -26,6 +24,7 @@
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser.inputs.home-manager.follows = "home-manager";
 
     oh-my-bash.url = "github:ohmybash/oh-my-bash";
     oh-my-bash.flake = false;
@@ -36,19 +35,14 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    live-preview-nvim.url = "github:brianhuster/live-preview.nvim";
-    live-preview-nvim.flake = false;
   };
 
   outputs = inputs:
     inputs.snowfall-lib.mkFlake {
       inherit inputs;
       src = ./.;
-      specialArgs = { elo = 42; };
       channels-config.allowUnfree = true;
       snowfall.namespace = "dotfiles";
-      overlays = with inputs; [ snowfall-flake.overlays."package/flake" ];
       system.modules.nixos = with inputs;
         [ home-manager.nixosModules.home-manager ];
     };

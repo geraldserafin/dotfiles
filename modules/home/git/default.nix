@@ -10,9 +10,9 @@ lib.${namespace}.mkModule "git" config {
   config = {
     programs.git = {
       enable = true;
-      userName = config.${namespace}.git.userName;
-      userEmail = config.${namespace}.git.userEmail;
-      extraConfig = {
+      settings = {
+        user.name = config.${namespace}.git.userName;
+        user.email = config.${namespace}.git.userEmail;
         credential.helper = "store";
         url."ssh://git@host".insteadOf = "otherhost";
       };

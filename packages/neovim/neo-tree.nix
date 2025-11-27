@@ -1,8 +1,10 @@
 {
   plugins.neo-tree = {
     enable = false;
-    hideRootNode = true;
-    window.width = 32;
+    settings = {
+      hide_root_node = true;
+      window.width = 32;
+    };
   };
   keymaps = [{
     key = "<C-b>";

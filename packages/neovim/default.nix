@@ -5,7 +5,6 @@ let
     version = "master";
     src = inputs.base16-black-metal-scheme;
   };
-
 in inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
   inherit pkgs;
   module = {
@@ -30,6 +29,7 @@ in inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
       ./marks.nix
       ./harpoon.nix
       ./ts-autotag.nix
+      ./typst-preview.nix
     ];
 
     extraPlugins = [ black-metal-theme ];

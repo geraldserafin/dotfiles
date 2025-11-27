@@ -10,9 +10,11 @@ in {
     ripgrep
     libnotify
     dconf
-    snowfallorg.flake
     yazi
     gemini-cli
+    devenv
+    live-server
+    # google-chrome
   ];
 
   home.sessionVariables.TERMINAL = "kitty";
