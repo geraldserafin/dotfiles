@@ -1,10 +1,7 @@
 {
   plugins.oil = {
     enable = true;
-    settings.view_options = {
-      show_hidden = true;
-      show_icons = true;
-    };
+    settings.columns = [ "permissions" "size" ];
   };
   plugins.oil-git-status.enable = true;
 

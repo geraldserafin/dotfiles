@@ -1,4 +1,5 @@
-{ ... }: {
+{ pkgs, ... }:
+{
   plugins = {
     lsp = {
       enable = true;
@@ -9,13 +10,18 @@
         svelte.enable = true;
         elixirls = {
           enable = true;
-          settings.elixirLS.formatterOptions = { autoParentheses = false; };
+          settings.elixirLS.formatterOptions = {
+            autoParentheses = false;
+          };
         };
         hls = {
           enable = true;
           packageFallback = true;
-          installGhc = true;
-          settings.haskell.formattingProvider = "fourmolu";
+          installGhc = false;
+          settings.haskell = {
+            formattingProvider = "fourmolu";
+            plugin.hlint.globalOn = false;
+          };
         };
         tailwindcss.enable = true;
         metals.enable = true;
@@ -30,9 +36,11 @@
         };
         jdtls = {
           enable = true;
+          package = pkgs.jdt-language-server;
           settings.java = {
             signatureHelp.enabled = true;
             imports = {
+              gradle.enabled = true;
               maven = {
                 enabled = true;
                 wrapper.enabled = true;
@@ -43,10 +51,9 @@
         ruff.enable = true;
         asm_lsp.enable = true;
         cssls.enable = true;
-        tinymist = {
-          enable = true;
-          packageFallback = true;
-        };
+        tinymist.enable = true;
+        sqls.enable = true;
+        phpactor.enable = true;
       };
       keymaps = {
         lspBuf = {
@@ -54,7 +61,7 @@
           "gD" = "references";
           "gt" = "type_definition";
           "gi" = "implementation";
-          "<leader>." = "code_action";
+          # "<leader>." = "code_action";
           "n" = "rename";
         };
         diagnostic = {

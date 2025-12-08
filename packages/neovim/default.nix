@@ -5,40 +5,68 @@ let
     version = "master";
     src = inputs.base16-black-metal-scheme;
   };
-in inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
+in
+inputs.nixvim.legacyPackages.${pkgs.stdenv.hostPlatform.system}.makeNixvimWithModule {
   inherit pkgs;
+
   module = {
     imports = [
-      ./alpha.nix
-      ./options.nix
-      ./lualine.nix
-      ./catppuccin.nix
       ./lsp.nix
-      ./neo-tree.nix
       ./none-ls.nix
-      ./telescope.nix
       ./treesitter.nix
       ./completions.nix
-      ./lazygit.nix
-      ./zen-mode.nix
       ./oil.nix
-      ./markdown-preview.nix
-      ./image.nix
       ./keymaps.nix
-      ./tmux-navigator.nix
-      ./marks.nix
-      ./harpoon.nix
-      ./ts-autotag.nix
-      ./typst-preview.nix
+      ./fzf.nix
+      ./lualine.nix
     ];
 
-    extraPlugins = [ black-metal-theme ];
+    plugins = {
+      image.enable = true;
+      typst-preview.enable = true;
+      tmux-navigator = {
+        enable = true;
+        settings.no_mappings = 1;
+      };
+      markdown-preview = {
+        enable = true;
+        settings.auto_start = 0;
+      };
+      opencode = {
+        enable = true;
+      };
+    };
+
+    extraPlugins = [
+      black-metal-theme
+      pkgs.vimPlugins.vim-dispatch
+    ];
+
+    opts = {
+      updatetime = 100;
+      number = true;
+      relativenumber = true;
+      splitbelow = true;
+      splitright = true;
+      scrolloff = 4;
+      autoindent = true;
+      clipboard = "unnamedplus";
+      expandtab = true;
+      shiftwidth = 2;
+      smartindent = true;
+      wrap = false;
+      ignorecase = true;
+      incsearch = true;
+      smartcase = true;
+      wildmode = "list:longest";
+      swapfile = false;
+      undofile = true;
+      termguicolors = true;
+      showmode = false;
+    };
+
+    globals.mapleader = " ";
 
     colorscheme = "base16-black-metal-marduk";
-
-    extraConfigVim = ''
-      autocmd FileType asm setlocal noautoindent nosmartindent indentexpr=
-      autocmd FileType asm,nasm,gas setlocal indentkeys=!^F
-    '';
   };
 }

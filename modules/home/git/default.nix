@@ -1,6 +1,5 @@
-{ config, lib, namespace, specialArgs, ... }@args:
+{ config, lib, namespace, ... }:
 
-builtins.trace "ARGS: ${toString (builtins.attrNames specialArgs)}"
 lib.${namespace}.mkModule "git" config {
   options = with lib.${namespace}; {
     userName = mkStringOption user.name "A name to be used.";

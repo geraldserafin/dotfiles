@@ -1,8 +1,6 @@
 { ... }:
 
 {
-  plugins.web-devicons.enable = false;
-
   opts = {
     updatetime = 100;
     number = true;
@@ -23,6 +21,7 @@
     swapfile = false;
     undofile = true;
     termguicolors = true;
+    autoread = true;
   };
 
   globals.mapleader = " ";

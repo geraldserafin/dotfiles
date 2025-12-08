@@ -7,6 +7,12 @@ in {
   programs.home-manager.enable = true;
 
   home.stateVersion = "23.11";
+  
+  # Disable documentation to save space
+  manual.manpages.enable = false;
+  manual.html.enable = false;
+  manual.json.enable = false;
+
   home.packages = with pkgs; [
     killall
     telegram-desktop

@@ -10,6 +10,7 @@
         };
         clang_format.enable = true;
         xmllint.enable = true;
+        phpcsfixer.enable = true;
       };
     };
     settings = {
