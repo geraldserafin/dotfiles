@@ -29,8 +29,7 @@
     oh-my-bash.url = "github:ohmybash/oh-my-bash";
     oh-my-bash.flake = false;
 
-    base16-black-metal-scheme.url =
-      "github:metalelf0/base16-black-metal-scheme";
+    base16-black-metal-scheme.url = "github:metalelf0/base16-black-metal-scheme";
     base16-black-metal-scheme.flake = false;
 
     sops-nix.url = "github:Mic92/sops-nix";
@@ -38,15 +37,22 @@
 
     devenv.url = "github:cachix/devenv";
     devenv.inputs.nixpkgs.follows = "nixpkgs";
+
+    helium.url = "github:schembriaiden/helium-browser-nix-flake";
+    helium.inputs.nixpkgs.follows = "nixpkgs";
+
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    llm-agents.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs:
+  outputs =
+    inputs:
     inputs.snowfall-lib.mkFlake {
       inherit inputs;
       src = ./.;
       channels-config.allowUnfree = true;
+      overlays = [ inputs.llm-agents.overlays.default ];
       snowfall.namespace = "dotfiles";
-      system.modules.nixos = with inputs;
-        [ home-manager.nixosModules.home-manager ];
+      system.modules.nixos = with inputs; [ home-manager.nixosModules.home-manager ];
     };
 }

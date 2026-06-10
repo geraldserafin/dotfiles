@@ -63,10 +63,24 @@ inputs.nixvim.legacyPackages.${pkgs.stdenv.hostPlatform.system}.makeNixvimWithMo
       undofile = true;
       termguicolors = true;
       showmode = false;
+      autoread = true;
     };
 
     globals.mapleader = " ";
 
     colorscheme = "base16-black-metal-marduk";
+
+    autoCmd = [
+      {
+        command = "if mode() != 'c' | checktime | endif";
+        event = [
+          "BufEnter"
+          "CursorHold"
+          "CursorHoldI"
+          "FocusGained"
+        ];
+        pattern = [ "*" ];
+      }
+    ];
   };
 }

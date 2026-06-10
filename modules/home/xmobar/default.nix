@@ -1,11 +1,18 @@
-{ config, lib, namespace, pkgs, ... }:
+{
+  config,
+  lib,
+  namespace,
+  pkgs,
+  ...
+}:
 
 let
   inherit (lib.${namespace}) mkBoolOption;
   cfg = config.${namespace}.xmobar;
   colors = config.lib.stylix.colors.withHashtag;
   fonts = config.stylix.fonts;
-in {
+in
+{
   options.${namespace}.xmobar.enable = mkBoolOption "Weather to enable xmobar";
 
   config = lib.mkIf cfg.enable {
@@ -38,7 +45,7 @@ in {
                                          ] 10
                             , Run Volume "default" "Master" [ "--template" , "vol:<fc=${colors.base0A}><volume></fc>%" ] 10
             		    , Run Date "%d-%m-%Y" "date" 10
-        		    , Run Date "%H:%M"    "time" 10
+        		    , Run Date "%H:%M:%S" "time" 10
         		    , Run StdinReader
                             ]
                , sepChar = "%"

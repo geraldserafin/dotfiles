@@ -17,11 +17,15 @@ lib.${namespace}.mkModule "ghostty" config {
   config = {
     programs.ghostty = {
       enable = true;
-      package = pkgs.ghostty-bin;
+      package = pkgs.ghostty;
       enableBashIntegration = true;
       enableZshIntegration = true;
+      settings = {
+        window-decoration = false;
+        gtk-titlebar = false;
+      };
     };
 
-    home.sessionVariables = lib.mkIf conf.setAsDefault { TERMINAL = "ghostty"; };
+    home.sessionVariables = lib.mkIf conf.setAsDefault { TERMINAL = lib.mkForce "ghostty"; };
   };
 }

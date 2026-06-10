@@ -26,7 +26,10 @@ import XMonad.Util.SessionStart (doOnce)
 import qualified Colors
 import qualified Options
 
-myLayout = mouseResize $ avoidStruts $ spacingWithEdge 4 $ (tiled ||| Mirror tiled ||| Full)
+myLayout = mouseResize 
+         $ avoidStruts 
+         -- $ spacingWithEdge 4 
+         $ (tiled ||| Mirror tiled ||| Full)
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1
@@ -74,9 +77,10 @@ myManageHook = composeAll
   ]
   
 myStartupHook = do
+  spawnOnce "spotify"
+  spawnOnce "vesktop"
   spawnOnce "zen"
-  spawnOnce "kitty --class kitty-music ncspot"
-  spawnOnOnce ws1 "kitty tmux a"
+  spawnOnOnce ws1 "kitty"
 
   windows $ O.viewOnScreen 1 ws2
   windows $ O.viewOnScreen 0 ws1 

@@ -54,6 +54,7 @@
         tinymist.enable = true;
         sqls.enable = true;
         phpactor.enable = true;
+        ols.enable = true;
       };
       keymaps = {
         lspBuf = {

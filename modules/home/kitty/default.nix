@@ -1,10 +1,16 @@
-{ config, lib, namespace, ... }:
+{
+  config,
+  lib,
+  namespace,
+  ...
+}:
 
-let conf = config.${namespace}.kitty;
-in lib.${namespace}.mkModule "kitty" config {
+let
+  conf = config.${namespace}.kitty;
+in
+lib.${namespace}.mkModule "kitty" config {
   options = with lib.${namespace}; {
-    setAsDefault =
-      mkBoolOption "Sets the TERMINAL variable to kitty when true.";
+    setAsDefault = mkBoolOption "Sets the TERMINAL variable to kitty when true.";
   };
 
   config = {

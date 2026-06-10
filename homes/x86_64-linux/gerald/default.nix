@@ -1,14 +1,23 @@
-{ pkgs, lib, inputs, config, namespace, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  config,
+  namespace,
+  system,
+  ...
+}:
 
-let inherit (lib.${namespace}) enabled disabled;
-in {
+let
+  inherit (lib.${namespace}) enabled disabled;
+in
+{
   imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
   programs.home-manager.enable = true;
 
   home.stateVersion = "23.11";
-  
-  # Disable documentation to save space
+
   manual.manpages.enable = false;
   manual.html.enable = false;
   manual.json.enable = false;
@@ -31,21 +40,41 @@ in {
     path-of-building
     vscode
     sops
-    claude-code
     gemini-cli
     livebook
     tree
     postman
+    devenv
+    chromium
+    btop
+    pkgs.llm-agents.claude-code
+    pkgs.llm-agents.pi
+    inputs.helium.packages.${system}.default
+    jujutsu
   ];
 
-  home.sessionVariables = { TERMINAL = "kitty"; };
+  home.sessionVariables = {
+    TERMINAL = "kitty";
+    BROWSER = "zen";
+  };
 
-  home.activation.cleanupBackups =
-    lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
-      $DRY_RUN_CMD find  $HOME -name "*.home-backup" -type f -delete
-    '';
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "zen-twilight.desktop";
+      "x-scheme-handler/http" = "zen-twilight.desktop";
+      "x-scheme-handler/https" = "zen-twilight.desktop";
+      "x-scheme-handler/about" = "zen-twilight.desktop";
+      "x-scheme-handler/unknown" = "zen-twilight.desktop";
+    };
+  };
+
+  home.activation.cleanupBackups = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+    $DRY_RUN_CMD find  $HOME -name "*.home-backup" -type f -delete
+  '';
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [ inputs.llm-agents.overlays.default ];
   fonts.fontconfig.enable = true;
 
   dotfiles = {
@@ -58,7 +87,9 @@ in {
       userEmail = "serafingerald@protonmail.com";
     };
     helix = disabled;
-    kitty = enabled;
+    kitty = enabled // {
+      setAsDefault = true;
+    };
     mopidy = disabled;
     mpd = disabled;
     ncmpcpp = disabled;
@@ -77,6 +108,9 @@ in {
     xmonad = enabled;
     zen-browser = enabled;
     zsh = disabled;
+    ghostty = enabled;
+    opencode = enabled;
+    emacs = enabled;
   };
 
   sops = {

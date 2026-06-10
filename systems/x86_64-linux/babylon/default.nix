@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [ ./hardware-configuration.nix ];
 
   boot.loader = {
@@ -7,18 +8,24 @@
   };
 
   networking = {
-    nameservers = [ "8.8.8.8" "1.1.1.1" ]; # Google + Cloudflare DNS
+    nameservers = [
+      "8.8.8.8"
+      "1.1.1.1"
+    ]; # Google + Cloudflare DNS
     enableIPv6 = false;
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.settings.auto-optimise-store = true;
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
-  
+
   # Save space by disabling documentation
   documentation.nixos.enable = false;
   documentation.man.enable = false;
@@ -30,15 +37,27 @@
     allowUnfree = true;
   };
 
+  boot.tmp.useTmpfs = false;
+
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 8 * 1024;
+    }
+  ];
+
   services = {
     pulseaudio.enable = false;
+    earlyoom.enable = true;
     xserver = {
       enable = true;
-      displayManager.session = [{
-        manage = "desktop";
-        name = "xsession";
-        start = "";
-      }];
+      displayManager.session = [
+        {
+          manage = "desktop";
+          name = "xsession";
+          start = "";
+        }
+      ];
     };
   };
 
@@ -64,9 +83,28 @@
 
   home-manager.backupFileExtension = "home-backup";
   home-manager.useGlobalPkgs = false;
+  programs.nix-ld.enable = true;
 
   dotfiles = {
     steam.enable = true;
     workman.enable = true;
+    site-blocker = {
+      enable = false;
+      domains = [
+        "youtube.com"
+        "www.youtube.com"
+        "twitter.com"
+        "www.twitter.com"
+        "x.com"
+        "tiktok.com"
+        "www.tiktok.com"
+        "instagram.com"
+        "www.instagram.com"
+        "twitch.tv"
+        "www.twitch.tv"
+        "kick.com"
+        "www.kick.com"
+      ];
+    };
   };
 }

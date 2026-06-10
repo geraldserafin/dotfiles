@@ -64,5 +64,6 @@ in
     starship = enabled;
     direnv = enabled;
     opencode = enabled;
+    zen-browser = enabled;
   };
 }
